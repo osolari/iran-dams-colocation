@@ -13,7 +13,7 @@ The random seed is fixed (`SEED = 20261116` in `src/common.py`); a full run take
 ## Documentation site
 
 ```bash
-pip install mkdocs-material
+pip install -r requirements-docs.txt   # MkDocs pinned below 2.0
 mkdocs serve        # local preview at http://127.0.0.1:8000
 mkdocs gh-deploy    # build and push to the gh-pages branch
 ```
