@@ -1,43 +1,44 @@
-\documentclass[11pt,a4paper]{article}
-\usepackage[margin=2.2cm]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{lmodern}
-\usepackage{microtype}
-\usepackage{graphicx}
-\usepackage{booktabs}
+% SAIM blog-post entrypoint (pdfLaTeX). Template v1.2.
+\documentclass[numbered]{saim-blog}
+\input{shared/metadata.tex}
+\graphicspath{{figures/}{shared/brand/logos/}}
+\input{shared/components/math.tex}
 \usepackage{longtable}
-\usepackage{array}
-\usepackage{amsmath}
-\usepackage[round,authoryear]{natbib}
-\usepackage{xcolor}
-\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
 \usepackage{xurl}
-\usepackage{caption}
-\captionsetup{font=small,labelfont=bf}
-\setlength{\parskip}{0.4em}
-\setlength{\parindent}{0pt}
+\renewcommand{\bibfont}{\small\RaggedRight}
 \input{numbers.tex}
 \makeatletter\newcommand{\inputtable}[1]{\@@input #1 }\makeatother
 
-\title{Dams, Missile Bases and Water: A Statistical Assessment of a \emph{New York Times} Claim about Iranian Dams}
-\author{Omid S.\ Solari, Ph.D.\\[3pt]\normalsize Ph.D.\ in Statistics, University of California, Berkeley}
-\date{17 November 2026}
+% Show the affiliations on their own line under the author in the opening.
+\makeatletter
+\patchcmd{\maketitle}{\textbf{\color{Ink}\ProjectAuthorsPlainDisplay}%
+   \saimblogsep{\color{Muted}\ProjectDate}}{\textbf{\color{Ink}\ProjectAuthorsPlainDisplay}\par
+   {\color{Muted}\ProjectAffiliationsPlainDisplay}\par
+   {\color{Muted}\ProjectDate}}{}{\PackageError{main}{Could not patch maketitle byline}{}}
+\makeatother
+
+\hypersetup{
+  pdftitle={A Statistical Assessment of "War May Answer Longtime Riddle of Iranian Dams Built for No Clear Reason"},
+  pdfauthor={\ProjectAuthorsPDF},
+  pdfsubject={The New York Times, 16 November 2026},
+  pdfkeywords={\ProjectKeywords}
+}
 
 \begin{document}
 \maketitle
 
-\begin{abstract}
-\noindent On 16 November 2026 \emph{The New York Times} suggested that Iran built an unusually large number of dams to supply its underground missile sites, pointing to a geographic overlap between dams and the sites struck by the United States and Israel \citep{nyt2026dams}. We tested this claim with open data.\footnote{All code, data and figures: \url{https://github.com/osolari/iran-dams-colocation}. Documentation: \url{https://osolari.github.io/iran-dams-colocation}.} \textbf{The data do not support it.}
+\begin{tldr}[Abstract]
+\setlength{\parskip}{0.55em}
+On 16 November 2026 \emph{The New York Times} suggested that Iran built an unusually large number of dams to supply its underground missile sites, pointing to a geographic overlap between dams and the sites struck by the United States and Israel \citep{nyt2026dams}. We tested this claim with open data.\footnote{All code, data and figures: \url{https://github.com/osolari/iran-dams-colocation}. Documentation: \url{https://osolari.github.io/iran-dams-colocation}.} \textbf{The data do not support it.}
 
-\smallskip\noindent \textbf{First, there is no unusual overlap between dams and missile bases.} The \NBases{} medium-range launch bases lie a median of \ObsMedian{}~km from the nearest of Iran's \NDams{} mapped dams, \textbf{not significantly closer than random locations in Iran} ($p=\PCSR$). A small difference in mean distance ($p=\PMeanCSR$) disappears once bases are compared with locations of similar terrain and similar distance to towns and rivers; \textbf{against those locations the bases are farther from dams than expected} ($p=\PMThree$). \textbf{Iranian towns and airports show the same apparent overlap, and towns show more of it.} The overlap reflects where people live and where rivers run, not military design.
+\textbf{First, there is no unusual overlap between dams and missile bases.} The \NBases{} medium-range launch bases lie a median of \ObsMedian{}~km from the nearest of Iran's \NDams{} mapped dams, \textbf{not significantly closer than random locations in Iran} ($p=\PCSR$). A small difference in mean distance ($p=\PMeanCSR$) disappears once bases are compared with locations of similar terrain and similar distance to towns and rivers; \textbf{against those locations the bases are farther from dams than expected} ($p=\PMThree$). \textbf{Iranian towns and airports show the same apparent overlap, and towns show more of it.} The overlap reflects where people live and where rivers run, not military design.
 
-\smallskip\noindent \textbf{Second, military bases near water are the norm, not the exception.} Compared with military sites in \GCountries{} other states, \textbf{Iran's launch bases rank \RankWater{}th of \RankOf{} for proximity to a dam or the coast: military sites in \ShareCloser\% of these states lie closer to water.}
+\textbf{Second, military bases near water are the norm, not the exception.} Compared with military sites in \GCountries{} other states, \textbf{Iran's launch bases rank \RankWater{}th of \RankOf{} for proximity to a dam or the coast: military sites in \ShareCloser\% of these states lie closer to water.}
 
-\smallskip\noindent \textbf{Third, Iran's dam numbers are not unusual for a water-scarce country.} \textbf{Its dam density is lower than that of Spain, Turkey or Morocco}, and its construction boom followed the same timeline as Turkey's.
+\textbf{Third, Iran's dam numbers are not unusual for a water-scarce country.} \textbf{Its dam density is lower than that of Spain, Turkey or Morocco}, and its construction boom followed the same timeline as Turkey's.
 
-\smallskip\noindent \textbf{The claim that Iran's dams were built to serve its missile programme is therefore not supported by the evidence.}
-\end{abstract}
+\textbf{The claim that Iran's dams were built to serve its missile programme is therefore not supported by the evidence.}
+\end{tldr}
 
 \section{The claims under examination}
 As reported in syndicated excerpts \citep{nyt2026dams,moa2026}, the article makes three connected claims:
@@ -51,7 +52,7 @@ The second claim concerns spatial co-location and can be tested directly. The fi
 \section{Data}
 \begin{center}
 \small
-\begin{tabular}{@{}p{3.6cm}p{6.4cm}p{5.6cm}@{}}
+\begin{tabularx}{\linewidth}{@{}>{\RaggedRight}p{2.5cm}>{\RaggedRight}X>{\RaggedRight}p{3.4cm}@{}}
 \toprule
 Layer & Content & Source \\
 \midrule
@@ -62,7 +63,7 @@ Terrain & Elevation and local relief on a 10 arc-minute grid & ETOPO1 \citep{ama
 Rivers, settlements, airports & Iranian river network and airports; towns of at least 50,000 & \citet{globalmapiran,naturalearth} \\
 Coastline, borders & 1:10m coastline (including the Caspian) and national boundaries & \citet{naturalearth} \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{center}
 Two inputs used by the article are not public. The first is Shokri's map of 533 dams. In its place we use Global Dam Watch (GDW), the standard harmonised global database, which records \NDams{} Iranian dams, roughly a third of that number. A more complete dam inventory would shorten distances for every type of site, not only for missile bases; because each test below compares the bases with matched sites under the same inventory, omitted small dams affect both sides of the comparison. The second is the article's map of 2026 strikes. In its place we use the Alma Research Center's list of the 25 principal medium-range launch bases, 19 of which were struck in June 2025. We could not assess how far this list overlaps with the 2026 strike map. The analysis can be rerun directly if either layer is released.
 
@@ -82,27 +83,27 @@ Sampled locations are jittered uniformly within their 10$'$ cell. All $p$-values
 \subsection{Results}
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.82\linewidth]{figures/fig1_map.pdf}
+\includegraphics[width=\linewidth]{figures/fig1_map.pdf}
 \caption{Iranian dams (GDW v1.0) and the 25 medium-range launch bases catalogued by \citet{alma2026}. Both are concentrated along the populated Zagros and Alborz arc, where towns, rivers and roads are also concentrated.}
 \label{fig:map}
 \end{figure}
 
 \begin{table}[h]
 \centering\small
-\begin{tabular}{@{}lcccc@{}}
+\begin{tabularx}{\linewidth}{@{}>{\RaggedRight}Xcccc@{}}
 \toprule
-Null model & Expected median (km) & 95\% range & Obs./exp. & $p$ (one-sided) \\
+Null model & Expected (km) & 95\% range & Obs./exp. & $p$ \\
 \midrule
 \inputtable{tab_nulls.tex}
 \bottomrule
-\end{tabular}
-\caption{Observed median base-to-dam distance (\ObsMedian{}~km) compared with each null model (\NSim{} simulations).}
+\end{tabularx}
+\caption{Observed median base-to-dam distance (\ObsMedian{}~km) compared with each null model (\NSim{} simulations). Expected = median of the simulated medians; $p$ is one-sided.}
 \label{tab:nulls}
 \end{table}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.85\linewidth]{figures/fig2_nulls.pdf}
+\includegraphics[width=\linewidth]{figures/fig2_nulls.pdf}
 \caption{Simulated distributions of the median base-to-dam distance under each null model. The vertical line marks the observed value.}
 \label{fig:nulls}
 \end{figure}
@@ -117,14 +118,14 @@ The results are summarised in Table~\ref{tab:nulls} and Figures~\ref{fig:nulls} 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.75\linewidth]{figures/fig3_ecdf.pdf}
+\includegraphics[width=\linewidth]{figures/fig3_ecdf.pdf}
 \caption{Empirical cumulative distribution of base-to-dam distances, with 95\% envelopes under CSR and under the fully matched null M3.}
 \label{fig:ecdf}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.85\linewidth]{figures/fig4_placebo.pdf}
+\includegraphics[width=\linewidth]{figures/fig4_placebo.pdf}
 \caption{Placebo comparison. Under the unadjusted test, towns and airports appear at least as close to dams as the missile bases; none is unusual once sites are matched.}
 \label{fig:placebo}
 \end{figure}
@@ -153,7 +154,7 @@ To quantify the pattern, we took every current military site in Wikidata with co
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=0.92\linewidth]{figures/fig7_rank_water.pdf}
+\includegraphics[width=\linewidth]{figures/fig7_rank_water.pdf}
 \caption{Median (with 95\% bootstrap interval) and mean distance from military sites to the nearest dam or sea coast, by country. Iranian rows are shown in crimson: the launch bases and the 22 Iranian sites recorded in Wikidata.}
 \label{fig:rank}
 \end{figure}
@@ -166,13 +167,13 @@ The Iranian launch bases have a median distance to the nearest dam or coast of \
 \label{sec:scarcity}
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/fig5_timelines.pdf}
+\includegraphics[width=\linewidth]{figures/fig5_timelines.pdf}
 \caption{Dam completions per five-year period, GDW v1.0 (dams with a recorded completion year). The final Iranian bin covers 2020--2021 only.}
 \label{fig:timelines}
 \end{figure}
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.8\linewidth]{figures/fig6_density.pdf}
+\includegraphics[width=\linewidth]{figures/fig6_density.pdf}
 \caption{Dams per 10,000~km$^2$ from national counts: Iran (533, as reported in the article), Turkey \citep{rew_turkey}, Spain \citep{berga2006spain}, Morocco \citep{mipa_morocco} and Saudi Arabia \citep{saudipedia_dams}. Definitions differ: Spain's figure counts large dams only, whereas Iran's includes small dams, so the comparison if anything overstates Iran's relative density.}
 \label{fig:density}
 \end{figure}
@@ -207,7 +208,9 @@ Beyond the statistical results, three features of the article's evidence deserve
 All data, code and figures are available at \url{https://github.com/osolari/iran-dams-colocation}, with documentation at \url{https://osolari.github.io/iran-dams-colocation}. Every number and table in this report is generated by the code from the data; none is transcribed by hand. The full analysis, including this document, is reproduced by running \texttt{run\_all.sh}.
 
 \bibliographystyle{plainnat}
-\bibliography{refs}
+\bibliography{shared/bibliography/references}
+
+\postauthorcard
 
 \clearpage
 \appendix
@@ -239,7 +242,7 @@ Rank & Country & $n$ & \multicolumn{2}{c}{Water} & Dam & Coast & Ratio \\
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.85\linewidth]{figures/fig8_rank_dam.pdf}
+\includegraphics[width=\linewidth]{figures/fig8_rank_dam.pdf}
 \caption{As Figure~\ref{fig:rank}, dams only.}
 \label{fig:rankdam}
 \end{figure}

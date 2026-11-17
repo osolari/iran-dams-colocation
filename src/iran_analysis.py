@@ -220,7 +220,7 @@ def figures(bases, nulls, curves, res):
     gx, gy = poly.exterior.xy if poly.geom_type == "Polygon" else max(poly.geoms, key=lambda g: g.area).exterior.xy
 
     # Fig 1: map
-    fig, ax = plt.subplots(figsize=(7, 5.6))
+    fig, ax = plt.subplots(figsize=(5.3, 4.5))
     piv = cells.pivot_table(index="lat", columns="lon", values="elev")
     sc = ax.pcolormesh(piv.columns.values, piv.index.values, np.ma.masked_invalid(piv.values),
                        cmap="Greys", vmin=-500, vmax=3500, shading="nearest", edgecolors="none",
@@ -232,7 +232,7 @@ def figures(bases, nulls, curves, res):
                label=f"Launch bases struck in June 2025 (n = {st.sum()})", zorder=4)
     ax.scatter(bases.lon[~st], bases.lat[~st], s=50, marker="^", facecolor="white", edgecolor=style.CRIMSON, lw=1.4,
                label=f"Launch bases not struck (n = {(~st).sum()})", zorder=4)
-    cb = fig.colorbar(sc, ax=ax, shrink=0.6, pad=0.02); cb.set_label("Elevation (m), ETOPO1 at 10 arc-min")
+    cb = fig.colorbar(sc, ax=ax, shrink=0.55, pad=0.07); cb.set_label("Elevation (m), ETOPO1 at 10 arc-min")
     ax.set_xlabel("Longitude (°E)"); ax.set_ylabel("Latitude (°N)"); ax.set_aspect(1 / np.cos(np.radians(32.5)))
     ax.legend(loc="lower left", frameon=True, framealpha=0.9, edgecolor="none", fontsize=7.5); ax.grid(False)
     ax.set_title("Iranian dams and medium-range missile launch bases")
@@ -242,7 +242,7 @@ def figures(bases, nulls, curves, res):
     obs = np.median(bases.d_dam)
     labels = {"CSR": "Uniform random in Iran (CSR)", "M1": "Matched: terrain", "M2": "Matched: terrain + city",
               "M3": "Matched: terrain + city + river", "RIV": "Dams re-placed along rivers"}
-    fig, axes = plt.subplots(len(labels), 1, figsize=(6.5, 6.8), sharex=True)
+    fig, axes = plt.subplots(len(labels), 1, figsize=(5.3, 6.4), sharex=True)
     for ax, (m, lab) in zip(axes, labels.items()):
         v = nulls[m]
         ax.hist(v, bins=60, color=style.STEEL, alpha=0.55, edgecolor="white", linewidth=0.3)
@@ -257,7 +257,7 @@ def figures(bases, nulls, curves, res):
     fig.tight_layout(); style.save(fig, "fig2_nulls"); plt.close(fig)
 
     # Fig 3: ECDF with envelopes
-    fig, ax = plt.subplots(figsize=(6.5, 4))
+    fig, ax = plt.subplots(figsize=(5.3, 3.5))
     x = np.sort(bases.d_dam.values); y = np.arange(1, len(x) + 1) / len(x)
     q = np.linspace(0, 1, len(x) + 1)[1:]
     for m, col, lab in (("CSR", style.BLACK, "CSR 95% envelope"), ("M3", style.STEEL, "Matched (M3) 95% envelope")):
@@ -276,17 +276,17 @@ def figures(bases, nulls, curves, res):
     short = {"Cities >= 50k (Natural Earth)": "Towns of 50,000+", "Airports (Global Map Iran)": "Airports"}
     for k, v in res["placebo"].items():
         rows.append((f"{short.get(k, k)} (n = {v['n']})", v["observed_median"], v["csr_null_median"], v["m3_null_median"]))
-    fig, ax = plt.subplots(figsize=(6.5, 3.1))
+    fig, ax = plt.subplots(figsize=(5.3, 2.9))
     for i, (lab, o, c, m3) in enumerate(rows):
         ax.hlines(i, 30, 66, color=style.GRID, lw=1, zorder=0)
-        ax.scatter(c, i, s=55, marker="s", color=style.BLACK, zorder=2, label="Expected: random sites in Iran (CSR)" if i == 0 else None)
-        ax.scatter(m3, i, s=70, marker="D", facecolor="none", edgecolor=style.STEEL, lw=1.8, zorder=3, label="Expected: matched sites (M3)" if i == 0 else None)
+        ax.scatter(c, i, s=55, marker="s", color=style.BLACK, zorder=2, label="Random sites (CSR)" if i == 0 else None)
+        ax.scatter(m3, i, s=70, marker="D", facecolor="none", edgecolor=style.STEEL, lw=1.8, zorder=3, label="Matched sites (M3)" if i == 0 else None)
         ax.scatter(o, i, s=55, color=style.CRIMSON, zorder=4, label="Observed" if i == 0 else None)
-    ax.set_yticks(range(len(rows)), [r[0] for r in rows]); ax.set_ylim(len(rows) - 0.5, -0.5)
+    ax.set_yticks(range(len(rows)), [r[0] for r in rows], fontsize=8); ax.set_ylim(len(rows) - 0.5, -0.5)
     ax.set_xlim(30, 66); ax.grid(axis="y", visible=False)
     ax.set_xlabel("Median distance to nearest dam (km)")
-    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.24), ncol=3, fontsize=7.5, handletextpad=0.4, columnspacing=1.2)
-    ax.set_title("Placebo comparison: median distance to nearest dam")
+    ax.legend(loc="upper center", bbox_to_anchor=(0.45, -0.25), ncol=3, fontsize=7.5, handletextpad=0.4, columnspacing=1.2)
+    ax.set_title("Placebo comparison: median distance to nearest dam", fontsize=9.5)
     style.save(fig, "fig4_placebo"); plt.close(fig)
 
 if __name__ == "__main__":

@@ -37,19 +37,19 @@ def timelines():
     g = pd.read_csv(PROC / "gdw_barriers_global.csv", low_memory=False)
     g = g[g.YEAR_DAM.between(1900, 2025)]
     countries = ["Iran", "Turkey", "Spain", "Morocco", "Algeria", "United States"]
-    fig, axes = plt.subplots(2, 3, figsize=(7.2, 4.8), sharex=True)
+    fig, axes = plt.subplots(2, 3, figsize=(5.3, 4.3), sharex=True)
     out = {}
     for ax, c in zip(axes.ravel(), countries):
         s = g[g.COUNTRY == c].YEAR_DAM
         dec = (s // 5 * 5).value_counts().sort_index()
         ax.bar(dec.index + 2.5, dec.values, width=4.2, color=style.CRIMSON if c == "Iran" else style.STEEL)
         peak = int(dec.idxmax())
-        ax.set_title(f"{c}\nn = {len(s)}, peak {peak}–{peak+4}", fontsize=8.5)
+        ax.set_title(f"{c}\nn = {len(s)}, peak {peak}–{peak+4}", fontsize=8)
         ax.set_xlim(1900, 2026)
         out[c] = {"n_with_year": int(len(s)), "peak_5yr": peak, "median_year": float(s.median()),
                   "share_after_1990": float((s >= 1990).mean())}
     for ax in axes[-1]:
-        ax.set_xlabel("Completion year (5-yr bins)")
+        ax.set_xlabel("Completion year")
     for ax in axes[:, 0]:
         ax.set_ylabel("Dams completed")
     fig.suptitle("Dam completions per five-year period (GDW v1.0)", fontsize=10)
@@ -60,7 +60,7 @@ def timelines():
 
 
 def density_fig(o):
-    fig, ax = plt.subplots(figsize=(6.5, 2.6))
+    fig, ax = plt.subplots(figsize=(5.3, 2.5))
     o = o.sort_values("dams_per_10k_km2")
     cols = [style.CRIMSON if c == "Iran" else style.STEEL for c in o.country]
     ax.barh(o.country, o.dams_per_10k_km2, color=cols, height=0.6)

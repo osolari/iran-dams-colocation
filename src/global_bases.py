@@ -129,7 +129,7 @@ def fig_rank(t, alma, key, fname, title, xlabel):
     t = pd.concat([t, pd.DataFrame([alma])], ignore_index=True)
     t = t.sort_values(f"{key}_median").reset_index(drop=True)
     h = max(4, 0.16 * len(t) + 1)
-    fig, ax = plt.subplots(figsize=(6.6, h))
+    fig, ax = plt.subplots(figsize=(5.3, h))
     y = np.arange(len(t))
     is_ir = t.country.str.startswith("Iran")
     lo, hi, md, mn = t[f"{key}_median_lo"], t[f"{key}_median_hi"], t[f"{key}_median"], t[f"{key}_mean"]

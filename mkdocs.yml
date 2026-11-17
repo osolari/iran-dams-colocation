@@ -1,5 +1,5 @@
-site_name: Dams, missile bases and water
-site_description: A statistical assessment of a New York Times claim about Iranian dams
+site_name: Statistical assessment of the NYT Iranian dams article
+site_description: A statistical assessment of "War May Answer Longtime Riddle of Iranian Dams Built for No Clear Reason" (The New York Times, 16 November 2026)
 site_author: Omid S. Solari, Ph.D.
 site_url: https://osolari.github.io/iran-dams-colocation/
 repo_url: https://github.com/osolari/iran-dams-colocation

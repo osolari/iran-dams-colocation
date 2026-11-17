@@ -10,3 +10,4 @@ report/*.fdb_latexmk
 report/*.toc
 .DS_Store
 site/
+report/build/

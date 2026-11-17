@@ -1,8 +1,8 @@
-# Dams, missile bases and water
+# A Statistical Assessment of "War May Answer Longtime Riddle of Iranian Dams Built for No Clear Reason"
 
-**A statistical assessment of a *New York Times* claim about Iranian dams**
+*The New York Times*, 16 November 2026
 
-Omid S. Solari, Ph.D. (Ph.D. in Statistics, University of California, Berkeley)
+Omid S. Solari, Ph.D. (Ph.D. in Statistics, University of California, Berkeley; sAIm Labs)
 
 On 16 November 2026 *The New York Times* suggested that Iran's dams overlap geographically with the underground missile
 sites struck by the United States and Israel, that Iran has an unusually large number of dams, and that the dams may have

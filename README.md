@@ -1,5 +1,8 @@
-# iran-dams-colocation
-Omid S. Solari, Ph.D.
+# A Statistical Assessment of "War May Answer Longtime Riddle of Iranian Dams Built for No Clear Reason"
+
+*The New York Times*, 16 November 2026. Repository: `iran-dams-colocation`.
+
+Omid S. Solari, Ph.D. (Ph.D. in Statistics, University of California, Berkeley; sAIm Labs)
 
 [![docs](https://github.com/osolari/iran-dams-colocation/actions/workflows/docs.yml/badge.svg)](https://github.com/osolari/iran-dams-colocation/actions/workflows/docs.yml)
 
@@ -28,7 +31,7 @@ data/processed/   derived datasets (GDW slim copy, Iran grid with covariates, Wi
 data/external/    full GDW shapefile (not committed; see docs/sources.md)
 src/              analysis code
 results/tables/   CSV/JSON outputs
-report/           LaTeX report, figures, auto-generated macros and tables
+report/           LaTeX report on the SAIM blog template v1.2 (Overleaf-ready), figures, generated macros and tables
 docs/             documentation site (MkDocs), data sources, GDW technical documentation
 ```
 
@@ -51,6 +54,7 @@ Random seed is fixed (`SEED = 20261116` in `src/common.py`). Full run: about 2 m
 | `src/crosscountry.py` | Dam density from national counts; GDW construction timelines; Figures 5 and 6 |
 | `src/global_bases.py` | Wikidata military bases worldwide; distance to dam or coast; country ranking with bootstrap CIs and own-geography ratio; Figures 7 and 8 |
 | `src/make_tex.py` | Writes `report/numbers.tex` and table fragments from results |
+| `src/make_docs.py` | Writes the numbered documentation pages (`docs/index.md`, `docs/results.md`) |
 
 ## Limitations
 
