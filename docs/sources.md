@@ -11,7 +11,6 @@
 | `data/raw/ne_10m_*.geojson` | Countries, coastline (incl. Caspian), populated places, airports | Natural Earth via github.com/nvkelso/natural-earth-vector | public domain |
 | `data/raw/globalmap_iran/` | Iranian rivers, airports, settlements (Global Map Iran v2) | National Cartographic Center of Iran / ISCGM, github.com/globalmaps/gmir20 | non-commercial |
 | `data/raw/official_dam_counts.csv` | National dam counts for density comparison | sources and URLs in the file | cited |
-| `docs/authors_catalogue.csv` | 40 articles by Mahoozi and Solomon, coded | Muck Rack, Context, The Conversation, DAWN, White House, NewsBusters, OPC | metadata only |
 
 ## Not available to this analysis
 - The NYT article text (nytimes.com is blocked to the analysis tools; syndicated excerpts used instead).

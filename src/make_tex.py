@@ -108,19 +108,4 @@ for i, x in t.iterrows():
                 f"{f1(x.d_dam_median)} & {f1(x.d_coast_median)} & {x.d_water_ratio:.2f} \\\\")
 open(OUT / "tab_ranking.tex", "w").write("\n".join(rows) + "\n")
 
-# Table: author catalogue
-c = pd.read_csv(ROOT / "docs" / "authors_catalogue.csv").fillna("")
-rows = [f"{esc(x.date)} & {esc(x.outlet)} & {esc(x.headline)} & {esc(x.author_focus.replace("+", " + "))} & {esc(x.advocates_military_action)} & "
-        f"{esc(x.framing_of_islamic_republic)} & {esc(x.framing_of_us_policy)} \\\\" for _, x in c.iterrows()]
-open(OUT / "tab_authors.tex", "w").write("\n".join(rows) + "\n")
-ir = c[c.iran_topic.isin(["yes", "partly"])]
-mm = {"CatN": len(c), "CatIran": len(ir),
-      "CatAdvocate": int(ir.advocates_military_action.str.startswith("yes").sum()),
-      "CatCritIR": int(ir.framing_of_islamic_republic.str.startswith("critical").sum()),
-      "CatCritUS": int(ir.framing_of_us_policy.str.startswith("critical").sum()),
-      "CatMahoozi": int(c.author_focus.str.contains("Mahoozi").sum()),
-      "CatSolomon": int(c.author_focus.str.contains("Solomon").sum())}
-with open(OUT / "numbers.tex", "a") as fh:
-    for k, v in mm.items():
-        fh.write(f"\\newcommand{{\\{k}}}{{{v}}}\n")
 print(open(OUT / "numbers.tex").read())

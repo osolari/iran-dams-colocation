@@ -29,4 +29,4 @@ The GitHub Actions workflow in `.github/workflows/docs.yml` rebuilds and publish
 | `src/` | Analysis code |
 | `results/tables/` | CSV and JSON outputs |
 | `report/` | LaTeX report, figures (PDF), generated macros and tables |
-| `docs/` | This site: pages, figures (PNG), data sources, author catalogue |
+| `docs/` | This site: pages, figures (PNG), data sources |

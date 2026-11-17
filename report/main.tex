@@ -28,17 +28,15 @@
 \maketitle
 
 \begin{abstract}
-\noindent On 16 November 2026 \emph{The New York Times} suggested that Iran's dams overlap geographically with the underground missile sites struck by the United States and Israel, that Iran has an unusually large number of dams, and that the dams may have been built to supply water and power to those sites \citep{nyt2026dams}. We test each element of this argument with open data; all code, data and figures are publicly available.\footnote{Repository: \url{https://github.com/osolari/iran-dams-colocation}. Documentation and figures: \url{https://osolari.github.io/iran-dams-colocation}.}
+\noindent On 16 November 2026 \emph{The New York Times} suggested that Iran built an unusually large number of dams to supply its underground missile sites, pointing to a geographic overlap between dams and the sites struck by the United States and Israel \citep{nyt2026dams}. We tested this claim with open data.\footnote{All code, data and figures: \url{https://github.com/osolari/iran-dams-colocation}. Documentation: \url{https://osolari.github.io/iran-dams-colocation}.} \textbf{The data do not support it.}
 
-\smallskip\noindent \emph{Co-location.} For the \NBases{} medium-range launch bases catalogued by the Alma Research Center and the \NDams{} Iranian dams in the Global Dam Watch database, the median distance from a base to its nearest dam is \ObsMedian{}~km. \textbf{This is not significantly shorter than for random locations in Iran ($p=\PCSR$), and once comparison sites are matched on terrain and on distance to the nearest town and river, the bases lie farther from dams than expected ($p=\PMThree$).} The mean distance is shorter than random ($p=\PMeanCSR$), but this difference disappears under matching. \textbf{Iranian towns and airports show the same apparent overlap, which therefore reflects settlement geography rather than military design.}
+\smallskip\noindent \textbf{First, there is no unusual overlap between dams and missile bases.} The \NBases{} medium-range launch bases lie a median of \ObsMedian{}~km from the nearest of Iran's \NDams{} mapped dams, \textbf{not significantly closer than random locations in Iran} ($p=\PCSR$). A small difference in mean distance ($p=\PMeanCSR$) disappears once bases are compared with locations of similar terrain and similar distance to towns and rivers; \textbf{against those locations the bases are farther from dams than expected} ($p=\PMThree$). \textbf{Iranian towns and airports show the same apparent overlap, and towns show more of it.} The overlap reflects where people live and where rivers run, not military design.
 
-\smallskip\noindent \emph{Proximity to water.} \textbf{Military installations are commonly sited near water: across \GCountries{} states and \GBases{} military sites recorded in Wikidata, Iran's launch bases rank \RankWater{}th of \RankOf{} for proximity to the nearest dam or coast, and military sites in \ShareCloser\% of states lie closer to water.}
+\smallskip\noindent \textbf{Second, military bases near water are the norm, not the exception.} Compared with military sites in \GCountries{} other states, \textbf{Iran's launch bases rank \RankWater{}th of \RankOf{} for proximity to a dam or the coast: military sites in \ShareCloser\% of these states lie closer to water.}
 
-\smallskip\noindent \emph{Number of dams.} \textbf{Iran's dam construction coincides in timing with Turkey's and is less dense per unit area than that of Spain, Turkey or Morocco}, consistent with the response of other semi-arid states to water scarcity.
+\smallskip\noindent \textbf{Third, Iran's dam numbers are not unusual for a water-scarce country.} \textbf{Its dam density is lower than that of Spain, Turkey or Morocco}, and its construction boom followed the same timeline as Turkey's.
 
-\smallskip\noindent \emph{The authors.} \textbf{None of the \CatN{} articles by the two authors that we reviewed advocates military action.}
-
-\smallskip\noindent With neither the co-location nor the unusual-number premise supported by the data, the inference that Iran's dams were built to supply its missile sites is not supported by the evidence available.
+\smallskip\noindent \textbf{The claim that Iran's dams were built to serve its missile programme is therefore not supported by the evidence.}
 \end{abstract}
 
 \section{The claims under examination}
@@ -189,21 +187,13 @@ Where individual Iranian dams lack an evident civilian rationale, a documented c
 \label{sec:law}
 Under Additional Protocol~I, dams may not be attacked, even when they constitute military objectives, if the attack may release dangerous forces and cause severe losses among the civilian population. Their special protection ceases only if a dam is used ``for other than its normal function'' and in regular, significant and direct support of military operations \citep{apI}. Iran and the United States signed the Protocol but have not ratified it \citep{unprotocols}, so customary law governs between them \citep{lieber2022dams}; under the customary rule, ``particular care must be taken'' when attacking dams and installations in their vicinity \citep{icrcrule42}. A public account that recasts civilian dams as military supply infrastructure weakens that protection in practice, in a conflict in which US strikes have already damaged Iranian drinking-water reservoirs. A claim with these consequences should meet a high evidential standard. The analysis above indicates that it does not.
 
-\section{The authors' published record}
-\label{sec:authors}
-We examined whether the authors' published work shows a pattern of advocating military action against Iran or of hostility towards the Islamic Republic. We catalogued \CatN{} articles (\CatMahoozi{} by Mahoozi and \CatSolomon{} by Solomon, some co-authored) from Muck Rack, Context (Thomson Reuters Foundation), The Conversation and other outlets \citep{muckrack_mahoozi,context_mahoozi}, and coded each article on two questions using its headline and summary (Appendix~\ref{app:authors}).
-\begin{itemize}
-\item \textbf{Advocacy of military action.} \CatAdvocate{} of the \CatIran{} articles concerning Iran advocate war or military strikes.
-\item \textbf{Criticism of the Islamic Republic.} \CatCritIR{} of the \CatIran{} articles are critical of the Iranian government, chiefly over internet shutdowns, the repression of protesters and environmental mismanagement. The remainder are neutral news reports. \CatCritUS{} articles are critical of US policy, concerning the effect of sanctions on students and unfulfilled promises to protesters.
-\end{itemize}
-The only allegations of bias against Solomon that we found come from the opposite direction. The White House's ``media offenders'' page includes her in an entry accusing CNN and \emph{The New York Times} of circulating a pro-Iranian ``fake ten-point plan'', without identifying her byline \citep{wh_mediabias}, and NewsBusters described her as the newspaper's ``gal in Tehran'' for being too sympathetic to Iran \citep{newsbusters2026}. Her earlier work includes the \emph{Financial Times} investigation into the finances of ISIS, which received the Overseas Press Club's award for investigative reporting \citep{opc2015}.
-
-Critical reporting on a government does not constitute hostility towards a country or a religion, and the record examined here does not support describing either author as a warmonger, an Iranophobe or an Islamophobe. The article is open to criticism on other, better-founded grounds:
+\section{Evidential weaknesses of the article}
+\label{sec:weak}
+Beyond the statistical results, three features of the article's evidence deserve note.
 \begin{enumerate}
-\item \textbf{Relationship with the principal source.} Mahoozi has co-authored at least two pieces with Nima Shokri, whose map is the article's central evidence \citep{conversation_mahoozi_shokri}. This relationship is relevant to readers. Without access to the full text, we cannot confirm whether the article discloses it.
-\item \textbf{Balance of sources.} The security analysts quoted are a former Israeli military intelligence analyst and a fellow of the Washington Institute; the only Iranian official named in the excerpts available to us is a member of parliament.
 \item \textbf{Absence of a quantitative test.} The agreement of seven experts and a visual match between two maps do not establish co-location beyond chance. Section~\ref{sec:test} shows that the apparent association disappears under standard controls.
-\item \textbf{Departure from the author's earlier explanation.} Mahoozi has previously attributed Iran's surplus of dams to mismanagement \citep{dawn_madani}; the new article gives prominence to a military explanation for the same pattern. We could not establish whether the full text addresses the earlier explanation.
+\item \textbf{Balance of sources.} The security analysts quoted are a former Israeli military intelligence analyst and a fellow of the Washington Institute; the only Iranian official named in the excerpts available to us is a member of parliament.
+\item \textbf{Relationship with the principal source.} One of the authors has co-written at least two pieces with Nima Shokri, whose map is the article's central evidence \citep{conversation_mahoozi_shokri}. We could not confirm from the available excerpts whether the article discloses this.
 \end{enumerate}
 
 \section{Limitations}
@@ -211,7 +201,6 @@ Critical reporting on a government does not constitute hostility towards a count
 \item The article's full text, Shokri's dam map and the article's strike map were not available; we used the closest public substitutes. The conclusions should be re-examined if those data are released.
 \item Terrain is represented at 10$'$ (about 18~km), which is coarse; most of the adjustment comes from matching on towns and rivers. Finer terrain data would refine M1 but are unlikely to change the result under M3.
 \item Twenty-five bases is a small sample; the intervals in Table~\ref{tab:nulls} reflect this.
-\item The coding of the authors' articles relies on headlines and summaries rather than full texts. The coded spreadsheet is included in the repository so that others can review or recode it.
 \end{itemize}
 
 \section*{Data and code availability}
@@ -254,17 +243,5 @@ Rank & Country & $n$ & \multicolumn{2}{c}{Water} & Dam & Coast & Ratio \\
 \caption{As Figure~\ref{fig:rank}, dams only.}
 \label{fig:rankdam}
 \end{figure}
-
-\clearpage
-\section{Author catalogue}
-\label{app:authors}
-\scriptsize\setlength{\tabcolsep}{3pt}
-\begin{longtable}{@{}p{1.1cm}p{1.8cm}p{5.0cm}p{1.5cm}p{1.1cm}p{2.5cm}p{1.9cm}@{}}
-\toprule
-Date & Outlet & Headline & Author(s) & Urges war & Framing of Islamic Republic & Framing of US policy \\
-\midrule\endhead
-\inputtable{tab_authors.tex}
-\bottomrule
-\end{longtable}
 
 \end{document}

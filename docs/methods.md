@@ -31,8 +31,3 @@ geography and for country-specific gaps in dam coverage.
 ## Dam construction
 
 Dam densities use national counts; construction timelines use Global Dam Watch completion years.
-
-## Author catalogue
-
-Articles were collected from Muck Rack, Context (Thomson Reuters Foundation), The Conversation and other outlets and
-coded from headline and summary. See [The authors' record](authors.md).

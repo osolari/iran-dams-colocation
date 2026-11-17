@@ -1,4 +1,4 @@
-"""Generate the documentation-site pages that carry numbers (index, results, authors) from results files."""
+"""Generate the documentation-site pages that carry numbers (index, results) from results files."""
 from __future__ import annotations
 
 import json
@@ -13,7 +13,6 @@ g = json.load(open(TAB / "global_ranking_summary.json"))
 tl = json.load(open(TAB / "dam_timelines_gdw.json"))
 dens = pd.read_csv(TAB / "dam_density_official.csv")
 sens = pd.read_csv(TAB / "iran_sensitivity.csv")
-cat = pd.read_csv(DOCS / "authors_catalogue.csv").fillna("")
 
 
 def p(x):
@@ -28,9 +27,6 @@ o, t = r["observed"], r["tests"]
 w, wr = g["iran_alma_d_water_rank_among"], g["iran_alma_d_water_ratio_rank"]
 dr = g["iran_alma_d_dam_ratio_rank"]
 d = dens.set_index("country").dams_per_10k_km2
-ir = cat[cat.iran_topic.isin(["yes", "partly"])]
-n_adv = int(ir.advocates_military_action.str.startswith("yes").sum())
-n_crit = int(ir.framing_of_islamic_republic.str.startswith("critical").sum())
 
 index = f"""# Dams, missile bases and water
 
@@ -42,6 +38,9 @@ On 16 November 2026 *The New York Times* suggested that Iran's dams overlap geog
 sites struck by the United States and Israel, that Iran has an unusually large number of dams, and that the dams may have
 been built to supply those sites. This site documents an open, reproducible test of each element of that argument.
 
+**The data do not support the claim.** Missile bases are not unusually close to dams, military bases near water are the
+norm worldwide, and Iran's dam numbers are not unusual for a water-scarce country.
+
 [Read the full report (PDF)](report.pdf){{ .md-button .md-button--primary }}
 [Source code on GitHub](https://github.com/osolari/iran-dams-colocation){{ .md-button }}
 
@@ -49,13 +48,12 @@ been built to supply those sites. This site documents an open, reproducible test
 
 ## Findings
 
-| Claim | Finding |
+| Claim in the article | What the data show |
 |---|---|
-| Dams and missile sites overlap | **Not significant against random locations in Iran (median {o['median']:.1f} km, p = {p(t['CSR']['p_one_sided'])}); after matching on terrain, towns and rivers the bases lie farther from dams than expected (p = {p(t['M3']['p_one_sided'])}).** The mean is shorter than random (p = {p(sens.query("null=='CSR' and statistic=='mean'").p_one_sided.iloc[0])}) but not after matching. |
-| The overlap is distinctive to military sites | **Towns and airports show the same apparent overlap**; it reflects settlement geography. |
-| Military siting near water is anomalous | **Iran's launch bases rank {ordinal(w['rank'])} of {w['of']} states for proximity to the nearest dam or coast; military sites in {round(100*w['share_of_countries_closer'])}% of states lie closer to water.** Relative to each state's own geography: {ordinal(dr['rank'])} for dams, {ordinal(wr['rank'])} for dams or coast. |
-| Iran has unusually many dams | **Dam density of {d['Iran']:.1f} per 10,000 km², below Spain ({d['Spain']:.1f}), Turkey ({d['Turkey']:.1f}) and Morocco ({d['Morocco']:.1f}); construction peaks in {tl['Iran']['peak_5yr']}–{tl['Iran']['peak_5yr']+4}, the same period as Turkey.** |
-| The authors are warmongers | **{n_adv} of {len(ir)} Iran-related articles reviewed advocate military action**; {n_crit} criticise the Iranian government. |
+| Dams and missile sites overlap | **Rejected. Not significant against random locations in Iran (median {o['median']:.1f} km, p = {p(t['CSR']['p_one_sided'])}); after matching on terrain, towns and rivers the bases lie farther from dams than expected (p = {p(t['M3']['p_one_sided'])}).** The mean is shorter than random (p = {p(sens.query("null=='CSR' and statistic=='mean'").p_one_sided.iloc[0])}) but not after matching. |
+| The overlap is distinctive to military sites | **Rejected. Towns and airports show the same apparent overlap**; it reflects settlement geography. |
+| Military siting near water is anomalous | **Rejected. Iran's launch bases rank {ordinal(w['rank'])} of {w['of']} states for proximity to the nearest dam or coast; military sites in {round(100*w['share_of_countries_closer'])}% of states lie closer to water.** Relative to each state's own geography: {ordinal(dr['rank'])} for dams, {ordinal(wr['rank'])} for dams or coast. |
+| Iran has unusually many dams | **Rejected. Dam density of {d['Iran']:.1f} per 10,000 km², below Spain ({d['Spain']:.1f}), Turkey ({d['Turkey']:.1f}) and Morocco ({d['Morocco']:.1f}); construction peaks in {tl['Iran']['peak_5yr']}–{tl['Iran']['peak_5yr']+4}, the same period as Turkey.** |
 
 ## Caveats
 
@@ -131,20 +129,5 @@ in the same state.
 """
 (DOCS / "results.md").write_text(results)
 
-rows = "\n".join(
-    f"| {x.date} | {x.outlet} | {x.headline} | {x.author_focus.replace('+', ' + ')} | {x.advocates_military_action} | "
-    f"{x.framing_of_islamic_republic} | {x.framing_of_us_policy} |" for _, x in cat.iterrows())
-authors = f"""# The authors' published record
-
-{len(cat)} articles by Sanam Mahoozi and Erika Solomon, coded from headline and summary on whether they advocate military
-action and how they frame the Islamic Republic and US policy. Of the {len(ir)} Iran-related articles, **{n_adv} advocate
-military action** and {n_crit} are critical of the Iranian government. The coded file is
-`docs/authors_catalogue.csv`; Solomon's list is a sample (Muck Rack lists about 2,570 articles).
-
-| Date | Outlet | Headline | Author(s) | Urges war | Framing of Islamic Republic | Framing of US policy |
-|---|---|---|---|---|---|---|
-{rows}
-"""
-(DOCS / "authors.md").write_text(authors)
 shutil.copy(ROOT / "report" / "main.pdf", DOCS / "report.pdf")
 print("docs written")
