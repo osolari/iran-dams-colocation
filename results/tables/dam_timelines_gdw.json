@@ -1,0 +1,38 @@
+{
+ "Iran": {
+  "n_with_year": 159,
+  "peak_5yr": 2015,
+  "median_year": 2009.0,
+  "share_after_1990": 0.8867924528301887
+ },
+ "Turkey": {
+  "n_with_year": 523,
+  "peak_5yr": 2015,
+  "median_year": 2003.0,
+  "share_after_1990": 0.7858508604206501
+ },
+ "Spain": {
+  "n_with_year": 325,
+  "peak_5yr": 1985,
+  "median_year": 1972.0,
+  "share_after_1990": 0.2953846153846154
+ },
+ "Morocco": {
+  "n_with_year": 66,
+  "peak_5yr": 1990,
+  "median_year": 1989.5,
+  "share_after_1990": 0.5
+ },
+ "Algeria": {
+  "n_with_year": 74,
+  "peak_5yr": 1985,
+  "median_year": 1988.0,
+  "share_after_1990": 0.44594594594594594
+ },
+ "United States": {
+  "n_with_year": 4100,
+  "peak_5yr": 1965,
+  "median_year": 1962.0,
+  "share_after_1990": 0.05341463414634146
+ }
+}

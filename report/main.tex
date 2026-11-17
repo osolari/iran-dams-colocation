@@ -1,0 +1,260 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage[round,authoryear]{natbib}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{xurl}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0pt}
+\input{numbers.tex}
+\makeatletter\newcommand{\inputtable}[1]{\@@input #1 }\makeatother
+
+\title{Dams, Missile Bases and Water: A Statistical Assessment of a \emph{New York Times} Claim about Iranian Dams}
+\author{Omid S.\ Solari, Ph.D.\\[3pt]\normalsize Ph.D.\ in Statistics, University of California, Berkeley}
+\date{17 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent On 16 November 2026 \emph{The New York Times} reported that Iran has \textbf{an unusually large number of dams, many without an evident civilian purpose}; that these dams show \textbf{a striking geographic overlap with the underground missile sites struck by the United States and Israel}; and that \textbf{the dams may have been built to supply water and power to those sites} \citep{nyt2026dams}. The article also treats \textbf{the proximity of military installations to water infrastructure as anomalous}. We test these claims with open data. For the \NBases{} medium-range launch bases catalogued by the Alma Research Center and the \NDams{} Iranian dams in the Global Dam Watch database, the median distance from a base to its nearest dam is \ObsMedian{}~km. Compared with uniformly random locations in Iran, this median is not significantly smaller (one-sided $p=\PCSR$), although the mean distance is ($p=\PMeanCSR$). When comparison sites are matched on terrain and on distance to the nearest town and river, the bases lie \emph{farther} from dams than expected ($p=\PMThree$), and Iranian towns and airports exhibit the same apparent overlap. Across \GCountries{} countries and \GBases{} military sites recorded in Wikidata, the Iranian launch bases rank \RankWater{}th of \RankOf{} for proximity to the nearest dam or coast; relative to each country's own geography they rank \RankDamRatio{}th for dams and \RankWaterRatio{}th for dams or coast. Iran's dam-building programme coincides in timing with Turkey's and has a lower density per unit area than those of Spain, Turkey and Morocco. A review of \CatN{} articles by the two authors found none that advocates military action.
+\end{abstract}
+
+\section{The claims under examination}
+As reported in syndicated excerpts \citep{nyt2026dams,moa2026}, the article makes three connected claims:
+\begin{enumerate}
+\item Iran has an unusually large number of dams (at least 533, ``among the most of any country in the region''), many in places with no apparent civilian need.
+\item A map of airstrikes on suspected missile sites ``nearly matched'' a map of those dams.
+\item The dams may therefore have been built to supply water and power to hardened military sites. The authors describe this inference as ``speculative'' but ``highly suggestive''.
+\end{enumerate}
+The second claim concerns spatial co-location and can be tested directly. The first is comparative and can be assessed against other countries. The third is causal: location data can weaken it, if the first two claims fail, but cannot establish or exclude it. Section~\ref{sec:law} sets out why the framing has legal consequences.
+
+\section{Data}
+\begin{center}
+\small
+\begin{tabular}{@{}p{3.6cm}p{6.4cm}p{5.6cm}@{}}
+\toprule
+Layer & Content & Source \\
+\midrule
+Dams (Iran and global) & 41,145 barriers worldwide; \NDams{} in Iran, of which \NLargeDams{} are large (GRanD-derived) & Global Dam Watch v1.0 \citep{lehner2024gdw,lehner2011grand} \\
+Missile launch bases & \NBases{} medium-range launch bases with coordinates; 19 struck in June 2025, 6 not attacked & \citet{alma2026} \\
+Military sites worldwide & \GBases{} current sites in \GCountries{} countries with at least 15 sites & \citet{wikidata} \\
+Terrain & Elevation and local relief on a 10 arc-minute grid & ETOPO1 \citep{amante2009etopo1} \\
+Rivers, settlements, airports & Iranian river network and airports; towns of at least 50,000 & \citet{globalmapiran,naturalearth} \\
+Coastline, borders & 1:10m coastline (including the Caspian) and national boundaries & \citet{naturalearth} \\
+\bottomrule
+\end{tabular}
+\end{center}
+Two inputs used by the article are not public. The first is Shokri's map of 533 dams. In its place we use Global Dam Watch (GDW), the standard harmonised global database, which records \NDams{} Iranian dams, roughly a third of that number. A more complete dam inventory would shorten distances for every type of site, not only for missile bases; because each test below compares the bases with matched sites under the same inventory, omitted small dams affect both sides of the comparison. The second is the article's map of 2026 strikes. In its place we use the Alma Research Center's list of the 25 principal medium-range launch bases, 19 of which were struck in June 2025. We could not assess how far this list overlaps with the 2026 strike map. The analysis can be rerun directly if either layer is released.
+
+\section{Is the overlap unusual?}
+\label{sec:test}
+\subsection{Method}
+For each base we compute the great-circle distance to the nearest dam and summarise the 25 distances by their median (the primary statistic), their mean and the share within 20~km. We then estimate how often comparison sites, drawn \NSim{} times, are at least as close. The comparison sites come from a sequence of null models of increasing stringency:
+\begin{description}
+\item[CSR] locations drawn uniformly at random within Iran. This is the comparison implicit in a visual reading of two maps.
+\item[M1] for each base, a random location among the 40 grid cells closest to it in elevation and local relief.
+\item[M2] as M1, additionally matched on distance to the nearest town of at least 50,000 inhabitants.
+\item[M3] as M2, additionally matched on distance to the nearest mapped river.
+\item[RIV] the bases are held fixed and the \NDams{} dams are relocated at random along Iran's river network.
+\end{description}
+Sampled locations are jittered uniformly within their 10$'$ cell. All $p$-values are one-sided, testing whether the bases are closer to dams than expected.
+
+\subsection{Results}
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/fig1_map.pdf}
+\caption{Iranian dams (GDW v1.0) and the 25 medium-range launch bases catalogued by \citet{alma2026}. Both are concentrated along the populated Zagros and Alborz arc, where towns, rivers and roads are also concentrated.}
+\label{fig:map}
+\end{figure}
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Null model & Expected median (km) & 95\% range & Obs./exp. & $p$ (one-sided) \\
+\midrule
+\inputtable{tab_nulls.tex}
+\bottomrule
+\end{tabular}
+\caption{Observed median base-to-dam distance (\ObsMedian{}~km) compared with each null model (\NSim{} simulations).}
+\label{tab:nulls}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/fig2_nulls.pdf}
+\caption{Simulated distributions of the median base-to-dam distance under each null model. The vertical line marks the observed value.}
+\label{fig:nulls}
+\end{figure}
+
+The results are summarised in Table~\ref{tab:nulls} and Figures~\ref{fig:nulls} and~\ref{fig:ecdf}.
+
+\textbf{The unadjusted association is weak.} Only \ObsShareTen\% of bases lie within 10~km of a dam, and \ObsShareTwenty\% within 20~km. Relative to random locations in Iran, the median distance is not significantly smaller ($p=\PCSR$). The mean distance is significantly smaller ($p=\PMeanCSR$), indicating a modest tendency for bases to lie closer to dams than an arbitrary point in Iran, much of which is desert.
+
+\textbf{The association is explained by settlement geography.} The bases lie on average \BaseCity{}~km from a town of at least 50,000 and \BaseRiver{}~km from a river, compared with \IranCity{}~km and \IranRiver{}~km for Iran as a whole. Dams occupy the same river valleys that supply those towns. Matching on terrain alone leaves the association in place (M1, $p=\PMOne$). Adding distance to towns and rivers removes it: the bases then lie \emph{farther} from dams than their matched comparisons (M3, observed/expected $=\RatioMThree$, $p=\PMThree$). For the mean, $p\ge\PMeanMThreeMin$ across all match sizes (Table~\ref{tab:sens}).
+
+\textbf{Placebo sites show the same pattern.} Iranian towns of at least 50,000 lie a median of \CityObs{}~km from a dam, closer than the missile bases, and the difference from random locations is highly significant ($p=\CityPCSR$). Airports give a similar result ($p=\AirPCSR$). Under the matched null neither is unusual ($p=\CityPM$ and $p=\AirPM$; Figure~\ref{fig:placebo}). The overlap described in the article is therefore what one would expect of any infrastructure in western and central Iran.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.75\linewidth]{figures/fig3_ecdf.pdf}
+\caption{Empirical cumulative distribution of base-to-dam distances, with 95\% envelopes under CSR and under the fully matched null M3.}
+\label{fig:ecdf}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/fig4_placebo.pdf}
+\caption{Placebo comparison. Under the unadjusted test, towns and airports appear at least as close to dams as the missile bases; none is unusual once sites are matched.}
+\label{fig:placebo}
+\end{figure}
+
+\paragraph{Robustness.}
+Restricting the analysis to the \NLargeDams{} large dams yields the same conclusion (CSR $p=\PLargeCSR$; M3 $p=\PLargeMThree$). Bases struck in June 2025 are no closer to dams than those that were not attacked (medians \MedStruck{} and \MedNotStruck{}~km; Mann--Whitney $p=\PStruck$). If dams had been built to serve the bases, dams near bases might be expected to differ from the remainder. The \DamsNear{} dams within 25~km of a base have a median completion year of \YearNear{}, compared with \YearFar{} for all other dams ($p=\PYear$), and their recorded uses (irrigation, hydropower and flood control) are typical of the civilian inventory.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{@{}llccc@{}}
+\toprule
+Null & Match size $k$ & Median & Mean & Share within 20 km \\
+\midrule
+\inputtable{tab_sensitivity.tex}
+\bottomrule
+\end{tabular}
+\caption{One-sided $p$-values by test statistic and match size (3,000 simulations each).}
+\label{tab:sens}
+\end{table}
+
+\section{Proximity of military installations to water}
+\label{sec:global}
+The article presents the proximity of military sites to water infrastructure as anomalous. Historically, military installations have been sited near water for drinking supply, cooling, power and logistics. The United States chose Hanford for its plutonium reactors because of cooling water from the Columbia River and power from the Grand Coulee and Bonneville dams \citep{britannica_hanford}. Oak Ridge was located downstream of the Tennessee Valley Authority's Norris Dam, which ``figured favorably'' in the decision \citep{y12_beforey12}. The Soviet plutonium reactors at Krasnoyarsk-26 were built 200--300~m inside a mountain and cooled by water from the Yenisei \citep{bellona_k26,nei_ade2}. Pakistan's Mangla Cantonment adjoins the Mangla Dam \citep{mangla}, and the US Army Corps of Engineers owns and operates more than 700 dams \citep{usace_dams}.
+
+To quantify the pattern, we took every current military site in Wikidata with coordinates (air bases, barracks, naval bases, garrisons and other subclasses of ``military base'', excluding police barracks), assigned each to a country, and computed its distance to the nearest dam (GDW) or sea coast. We ranked the \GCountries{} countries with at least 15 sites by mean and median distance, with bootstrap confidence intervals. Because countries differ in geography, we also report a ratio: the median distance for military sites divided by the median distance for 2,000 random points within the same country. A ratio below one indicates that military sites lie closer to water than the country's territory as a whole.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=0.92\linewidth]{figures/fig7_rank_water.pdf}
+\caption{Median (with 95\% bootstrap interval) and mean distance from military sites to the nearest dam or sea coast, by country. The Iranian launch bases are shown in orange, alongside the 22 Iranian sites recorded in Wikidata.}
+\label{fig:rank}
+\end{figure}
+
+The Iranian launch bases have a median distance to the nearest dam or coast of \AlmaWater{}~km, which ranks \RankWater{}th of \RankOf{}; military sites in \ShareCloser\% of the ranked countries lie closer to water (Figure~\ref{fig:rank}, Table~\ref{tab:rank}). For dams alone the bases rank \RankDam{}th. Relative to Iran's own geography (ratio \AlmaWaterRatio{}), they rank \RankWaterRatio{}th for dams or coast and \RankDamRatio{}th for dams, close to the median of the distribution. Military sites in Turkey, Spain, Japan, France, the United Kingdom, the United States and China all lie closer to dams than the Iranian launch bases do (Figure~\ref{fig:rankdam}).
+
+\paragraph{Caveats.} Wikidata coverage is uneven: it records 686 German sites and 22 Iranian ones, and reflects what contributors have documented rather than an official inventory. GDW coverage of small dams also varies between countries; it records \NDams{} Iranian dams against the 533 reported in the article, and 18 Saudi dams against an official count of 559. This undercount inflates Iran's absolute distances to dams, so the absolute dam ranking favours the argument made here. The ratio is the more appropriate comparison, because the random benchmark points within each country are subject to the same undercount. On that measure the Iranian launch bases are close to the median for dams and below the median for dams or coast. Neither result supports the view that Iranian military siting is unusually oriented towards water. The coastline component is unaffected by dam coverage.
+
+\section{Dam construction as a response to water scarcity}
+\label{sec:scarcity}
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/fig5_timelines.pdf}
+\caption{Dam completions per five-year period, GDW v1.0 (dams with a recorded completion year). The final Iranian bin covers 2020--2021 only.}
+\label{fig:timelines}
+\end{figure}
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/fig6_density.pdf}
+\caption{Dams per 10,000~km$^2$ from national counts: Iran (533, as reported in the article), Turkey \citep{rew_turkey}, Spain \citep{berga2006spain}, Morocco \citep{mipa_morocco} and Saudi Arabia \citep{saudipedia_dams}. Definitions differ: Spain's figure counts large dams only, whereas Iran's includes small dams, so the comparison if anything overstates Iran's relative density.}
+\label{fig:density}
+\end{figure}
+
+Semi-arid states with the necessary resources have commonly responded to water scarcity by building dams. Spain built some 1,270 large dams, more than any other European country \citep{berga2006spain}. In 1967 King Hassan II of Morocco launched the \emph{politique des barrages} with the aim of irrigating one million hectares; the number of Moroccan dams rose from 13 at independence to more than 100 \citep{mwn_morocco}, and the country now has 144 large dams and 255 hill dams \citep{mipa_morocco}. Saudi Arabia, which has no permanent rivers, operates 559 dams \citep{saudipedia_dams} and plans a further 1,000. Turkey has 930 \citep{rew_turkey}.
+
+Iran's programme is late rather than anomalous. Of its dams with a recorded completion year, \IranAfterNinety\% were completed after 1990, with a peak in \IranTLpeak--\the\numexpr\IranTLpeak+4\relax{}. Turkey's programme peaks in the same period (\TurAfterNinety\% after 1990; peak \TurTLpeak--\the\numexpr\TurTLpeak+4\relax{}; Figure~\ref{fig:timelines}). Iran's 533 dams correspond to 3.3 per 10,000~km$^2$, fewer than in Spain, Turkey or Morocco (Figure~\ref{fig:density}).
+
+Where individual Iranian dams lack an evident civilian rationale, a documented civilian explanation is available in the political economy of construction. The IRGC's construction conglomerate, Khatam al-Anbiya, is reported to have built 25 of Iran's 45 billion cubic metres of storage capacity \citep{rudaw_kaa}, and analysts describe a ``water mafia'' with a durable claim on the national budget \citep{mei_watermafia}. One of the article's authors has previously made this case: \citet{dawn_madani} attributed Iran's water crisis in part to the government's ``excessive construction of dams and water transfer tunnels'' over many years. Patronage and mismanagement can account for dams without a clear purpose without reference to missile programmes. It should nonetheless be acknowledged that the same conglomerate also builds tunnels for the armed forces; this is the strongest point in favour of the article's hypothesis.
+
+\section{Legal significance of the framing}
+\label{sec:law}
+Under Additional Protocol~I, dams may not be attacked, even when they constitute military objectives, if the attack may release dangerous forces and cause severe losses among the civilian population. Their special protection ceases only if a dam is used ``for other than its normal function'' and in regular, significant and direct support of military operations \citep{apI}. Iran and the United States signed the Protocol but have not ratified it \citep{unprotocols}, so customary law governs between them \citep{lieber2022dams}; under the customary rule, ``particular care must be taken'' when attacking dams and installations in their vicinity \citep{icrcrule42}. A public account that recasts civilian dams as military supply infrastructure weakens that protection in practice, in a conflict in which US strikes have already damaged Iranian drinking-water reservoirs. A claim with these consequences should meet a high evidential standard. The analysis above indicates that it does not.
+
+\section{The authors' published record}
+\label{sec:authors}
+We examined whether the authors' published work shows a pattern of advocating military action against Iran or of hostility towards the Islamic Republic. We catalogued \CatN{} articles (\CatMahoozi{} by Mahoozi and \CatSolomon{} by Solomon, some co-authored) from Muck Rack, Context (Thomson Reuters Foundation), The Conversation and other outlets \citep{muckrack_mahoozi,context_mahoozi}, and coded each article on two questions using its headline and summary (Appendix~\ref{app:authors}).
+\begin{itemize}
+\item \textbf{Advocacy of military action.} \CatAdvocate{} of the \CatIran{} articles concerning Iran advocate war or military strikes.
+\item \textbf{Criticism of the Islamic Republic.} \CatCritIR{} of the \CatIran{} articles are critical of the Iranian government, chiefly over internet shutdowns, the repression of protesters and environmental mismanagement. The remainder are neutral news reports. \CatCritUS{} articles are critical of US policy, concerning the effect of sanctions on students and unfulfilled promises to protesters.
+\end{itemize}
+The only allegations of bias against Solomon that we found come from the opposite direction. The White House's ``media offenders'' page includes her in an entry accusing CNN and \emph{The New York Times} of circulating a pro-Iranian ``fake ten-point plan'', without identifying her byline \citep{wh_mediabias}, and NewsBusters described her as the newspaper's ``gal in Tehran'' for being too sympathetic to Iran \citep{newsbusters2026}. Her earlier work includes the \emph{Financial Times} investigation into the finances of ISIS, which received the Overseas Press Club's award for investigative reporting \citep{opc2015}.
+
+Critical reporting on a government does not constitute hostility towards a country or a religion, and the record examined here does not support describing either author as a warmonger, an Iranophobe or an Islamophobe. The article is open to criticism on other, better-founded grounds:
+\begin{enumerate}
+\item \textbf{Relationship with the principal source.} Mahoozi has co-authored at least two pieces with Nima Shokri, whose map is the article's central evidence \citep{conversation_mahoozi_shokri}. This relationship is relevant to readers. Without access to the full text, we cannot confirm whether the article discloses it.
+\item \textbf{Balance of sources.} The security analysts quoted are a former Israeli military intelligence analyst and a fellow of the Washington Institute; the only Iranian official named in the excerpts available to us is a member of parliament.
+\item \textbf{Absence of a quantitative test.} The agreement of seven experts and a visual match between two maps do not establish co-location beyond chance. Section~\ref{sec:test} shows that the apparent association disappears under standard controls.
+\item \textbf{Departure from the author's earlier explanation.} Mahoozi has previously attributed Iran's surplus of dams to mismanagement \citep{dawn_madani}; the new article gives prominence to a military explanation for the same pattern. We could not establish whether the full text addresses the earlier explanation.
+\end{enumerate}
+
+\section{Limitations}
+\begin{itemize}
+\item The article's full text, Shokri's dam map and the article's strike map were not available; we used the closest public substitutes. The conclusions should be re-examined if those data are released.
+\item Terrain is represented at 10$'$ (about 18~km), which is coarse; most of the adjustment comes from matching on towns and rivers. Finer terrain data would refine M1 but are unlikely to change the result under M3.
+\item Twenty-five bases is a small sample; the intervals in Table~\ref{tab:nulls} reflect this.
+\item The coding of the authors' articles relies on headlines and summaries rather than full texts. The coded spreadsheet is included in the repository so that others can review or recode it.
+\end{itemize}
+
+\section*{Data and code availability}
+All data, code and figures are available in the repository \texttt{iran-dams-colocation}. Every number and table in this report is generated by the code from the data; none is transcribed by hand. The full analysis, including this document, is reproduced by running \texttt{run\_all.sh}.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\clearpage
+\appendix
+\section{Launch bases and nearest dams}
+\footnotesize
+\begin{longtable}{@{}rlrrcp{4.2cm}r@{}}
+\toprule
+\# & Base & Lat & Lon & Struck 2025 & Nearest dam (GDW) & km \\
+\midrule\endhead
+\inputtable{tab_bases.tex}
+\bottomrule
+\end{longtable}
+
+\section{Country ranking}
+\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}rp{4.2cm}rrrrrr@{}}
+\caption{Distances (km) from military bases to water by country. Water = nearest dam or sea coast. Ratio = median for bases / median for random points in the same country.}\label{tab:rank}\\
+\toprule
+Rank & Country & $n$ & \multicolumn{2}{c}{Water} & Dam & Coast & Ratio \\
+ & & & median & mean & median & median & \\
+\midrule\endfirsthead
+\toprule
+Rank & Country & $n$ & \multicolumn{2}{c}{Water} & Dam & Coast & Ratio \\
+ & & & median & mean & median & median & \\
+\midrule\endhead
+\inputtable{tab_ranking.tex}
+\bottomrule
+\end{longtable}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/fig8_rank_dam.pdf}
+\caption{As Figure~\ref{fig:rank}, dams only.}
+\label{fig:rankdam}
+\end{figure}
+
+\clearpage
+\section{Author catalogue}
+\label{app:authors}
+\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{1.1cm}p{1.8cm}p{5.0cm}p{1.5cm}p{1.1cm}p{2.5cm}p{1.9cm}@{}}
+\toprule
+Date & Outlet & Headline & Author(s) & Urges war & Framing of Islamic Republic & Framing of US policy \\
+\midrule\endhead
+\inputtable{tab_authors.tex}
+\bottomrule
+\end{longtable}
+
+\end{document}

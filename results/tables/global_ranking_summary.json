@@ -1,0 +1,52 @@
+{
+ "current": {
+  "n_bases": 5806,
+  "n_countries_ranked": 54,
+  "iran_wikidata_n": 22
+ },
+ "iran_alma": {
+  "country": "Iran (25 launch bases, Alma 2026)",
+  "n_bases": 25,
+  "d_water_mean": 52.19904175403304,
+  "d_water_median": 44.53505640731625,
+  "d_water_median_lo": 27.445142884757846,
+  "d_water_median_hi": 56.75517528098873,
+  "d_water_rand_median": 58.10080470779797,
+  "d_water_ratio": 0.7665135901523753,
+  "d_dam_mean": 57.492654318165386,
+  "d_dam_median": 48.13503719166383,
+  "d_dam_median_lo": 32.613582545861874,
+  "d_dam_median_hi": 58.64196814122457,
+  "d_dam_rand_median": 65.66501009121815,
+  "d_dam_ratio": 0.7330393633503952,
+  "d_coast_mean": 232.8935782850318,
+  "d_coast_median": 239.8498306220626,
+  "d_coast_median_lo": 158.66241573630458,
+  "d_coast_median_hi": 328.59579122879904,
+  "d_coast_rand_median": 280.2698084910634,
+  "d_coast_ratio": 0.8557819049914197
+ },
+ "iran_alma_d_water_rank_among": {
+  "rank": 50,
+  "of": 55,
+  "share_of_countries_closer": 0.9074074074074074
+ },
+ "iran_alma_d_water_ratio_rank": {
+  "rank": 47,
+  "of": 55
+ },
+ "iran_alma_d_dam_rank_among": {
+  "rank": 45,
+  "of": 55,
+  "share_of_countries_closer": 0.8148148148148148
+ },
+ "iran_alma_d_dam_ratio_rank": {
+  "rank": 28,
+  "of": 55
+ },
+ "incl_dissolved": {
+  "n_bases": 6972,
+  "n_countries_ranked": 59,
+  "iran_wikidata_n": 23
+ }
+}

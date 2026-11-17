@@ -1,0 +1,307 @@
+{
+  "n_bases": 25,
+  "n_dams": 183,
+  "n_large_dams": 66,
+  "nsim": 10000,
+  "observed": {
+    "median": 48.13503719166383,
+    "mean": 57.492654318165386,
+    "share_le10": 0.08,
+    "share_le20": 0.12
+  },
+  "observed_large": {
+    "median": 80.60315630362496,
+    "mean": 82.75363705670199,
+    "share_le10": 0.04,
+    "share_le20": 0.04
+  },
+  "tests": {
+    "CSR": {
+      "null_median_of_medians": 62.25546422584854,
+      "null_q025": 38.65749374075325,
+      "null_q975": 104.86902598306412,
+      "ratio_obs_to_null": 0.7731857402434741,
+      "p_one_sided": 0.145985401459854
+    },
+    "M1": {
+      "null_median_of_medians": 60.28828904356322,
+      "null_q025": 39.110765773735636,
+      "null_q975": 97.08737644457095,
+      "ratio_obs_to_null": 0.7984143845396297,
+      "p_one_sided": 0.1511848815118488
+    },
+    "M2": {
+      "null_median_of_medians": 44.2211150183093,
+      "null_q025": 31.033545711430314,
+      "null_q975": 62.199812005930475,
+      "ratio_obs_to_null": 1.0885079937883522,
+      "p_one_sided": 0.6891310868913109
+    },
+    "M3": {
+      "null_median_of_medians": 39.62042650465774,
+      "null_q025": 27.796732284172464,
+      "null_q975": 52.52233759204411,
+      "ratio_obs_to_null": 1.2149045691369604,
+      "p_one_sided": 0.9076092390760924
+    },
+    "RIV": {
+      "null_median_of_medians": 35.26787326970627,
+      "null_q025": 24.798573956701855,
+      "null_q975": 50.13787231241718,
+      "ratio_obs_to_null": 1.3648409367799885,
+      "p_one_sided": 0.9626037396260374
+    }
+  },
+  "balance": {
+    "M1": {
+      "elev": {
+        "bases_mean": 1334.6,
+        "matched_mean": 1335.109,
+        "iran_mean": 1257.5997863628272
+      },
+      "relief": {
+        "bases_mean": 510.0,
+        "matched_mean": 507.714,
+        "iran_mean": 551.9784582517358
+      },
+      "d_city": {
+        "bases_mean": 44.834936583348416,
+        "matched_mean": 84.06728592986279,
+        "iran_mean": 92.54350961365166
+      },
+      "d_river": {
+        "bases_mean": 15.247508727091038,
+        "matched_mean": 32.401484419253485,
+        "iran_mean": 33.40009438536119
+      }
+    },
+    "M2": {
+      "elev": {
+        "bases_mean": 1334.6,
+        "matched_mean": 1344.899,
+        "iran_mean": 1257.5997863628272
+      },
+      "relief": {
+        "bases_mean": 510.0,
+        "matched_mean": 508.145,
+        "iran_mean": 551.9784582517358
+      },
+      "d_city": {
+        "bases_mean": 44.834936583348416,
+        "matched_mean": 48.787074034443734,
+        "iran_mean": 92.54350961365166
+      },
+      "d_river": {
+        "bases_mean": 15.247508727091038,
+        "matched_mean": 20.705359277510105,
+        "iran_mean": 33.40009438536119
+      }
+    },
+    "M3": {
+      "elev": {
+        "bases_mean": 1334.6,
+        "matched_mean": 1348.52,
+        "iran_mean": 1257.5997863628272
+      },
+      "relief": {
+        "bases_mean": 510.0,
+        "matched_mean": 501.009,
+        "iran_mean": 551.9784582517358
+      },
+      "d_city": {
+        "bases_mean": 44.834936583348416,
+        "matched_mean": 49.80955382011706,
+        "iran_mean": 92.54350961365166
+      },
+      "d_river": {
+        "bases_mean": 15.247508727091038,
+        "matched_mean": 14.340432404133049,
+        "iran_mean": 33.40009438536119
+      }
+    }
+  },
+  "tests_large": {
+    "CSR": {
+      "null_median": 113.19825227496419,
+      "p": 0.13096725818545363
+    },
+    "M3": {
+      "null_median": 70.88779182730536,
+      "p": 0.7245688577855536
+    }
+  },
+  "struck_vs_not": {
+    "median_struck": 48.13503719166383,
+    "median_not": 56.85918812941918,
+    "n_struck": 19,
+    "n_not": 6,
+    "mannwhitney_p": 0.302540937323546
+  },
+  "placebo": {
+    "Cities >= 50k (Natural Earth)": {
+      "n": 61,
+      "observed_median": 35.69250465872839,
+      "csr_null_median": 62.17997822775463,
+      "p_csr": 0.00024993751562109475,
+      "m3_null_median": 35.622851609285306,
+      "p_m3": 0.5056235941014746
+    },
+    "Airports (Global Map Iran)": {
+      "n": 57,
+      "observed_median": 47.55613848843193,
+      "csr_null_median": 62.09975278124463,
+      "p_csr": 0.052236940764808795,
+      "m3_null_median": 42.06791153983076,
+      "p_m3": 0.8560359910022495
+    }
+  },
+  "dams_near_vs_far": {
+    "n_near": 9,
+    "n_far": 174,
+    "median_year_near": 2008.0,
+    "median_year_far": 2009.0,
+    "year_mw_p": 0.9906673622977777,
+    "median_cap_near": 60.2,
+    "median_cap_far": 38.599999999999994,
+    "main_use_near": {
+      "Not recorded": 5,
+      "Irrigation": 2,
+      "Hydroelectricity": 1,
+      "Flood control": 1
+    },
+    "main_use_far": {
+      "Not recorded": 128,
+      "Irrigation": 31,
+      "Water supply": 8,
+      "Hydroelectricity": 7
+    }
+  },
+  "sensitivity": [
+    {
+      "null": "CSR",
+      "k": NaN,
+      "statistic": "median",
+      "p_one_sided": 0.14428523825391537
+    },
+    {
+      "null": "CSR",
+      "k": NaN,
+      "statistic": "mean",
+      "p_one_sided": 0.010663112295901367
+    },
+    {
+      "null": "CSR",
+      "k": NaN,
+      "statistic": "share_within_20km",
+      "p_one_sided": 0.578807064311896
+    },
+    {
+      "null": "M1",
+      "k": 20.0,
+      "statistic": "median",
+      "p_one_sided": 0.08230589803398868
+    },
+    {
+      "null": "M1",
+      "k": 20.0,
+      "statistic": "mean",
+      "p_one_sided": 0.008997000999666778
+    },
+    {
+      "null": "M1",
+      "k": 20.0,
+      "statistic": "share_within_20km",
+      "p_one_sided": 0.6181272909030323
+    },
+    {
+      "null": "M1",
+      "k": 40.0,
+      "statistic": "median",
+      "p_one_sided": 0.1469510163278907
+    },
+    {
+      "null": "M1",
+      "k": 40.0,
+      "statistic": "mean",
+      "p_one_sided": 0.011996001332889037
+    },
+    {
+      "null": "M1",
+      "k": 40.0,
+      "statistic": "share_within_20km",
+      "p_one_sided": 0.6494501832722426
+    },
+    {
+      "null": "M1",
+      "k": 80.0,
+      "statistic": "median",
+      "p_one_sided": 0.18427190936354548
+    },
+    {
+      "null": "M1",
+      "k": 80.0,
+      "statistic": "mean",
+      "p_one_sided": 0.015328223925358214
+    },
+    {
+      "null": "M1",
+      "k": 80.0,
+      "statistic": "share_within_20km",
+      "p_one_sided": 0.6421192935688104
+    },
+    {
+      "null": "M3",
+      "k": 20.0,
+      "statistic": "median",
+      "p_one_sided": 0.8910363212262579
+    },
+    {
+      "null": "M3",
+      "k": 20.0,
+      "statistic": "mean",
+      "p_one_sided": 0.453515494835055
+    },
+    {
+      "null": "M3",
+      "k": 20.0,
+      "statistic": "share_within_20km",
+      "p_one_sided": 0.8887037654115295
+    },
+    {
+      "null": "M3",
+      "k": 40.0,
+      "statistic": "median",
+      "p_one_sided": 0.9086971009663446
+    },
+    {
+      "null": "M3",
+      "k": 40.0,
+      "statistic": "mean",
+      "p_one_sided": 0.481839386871043
+    },
+    {
+      "null": "M3",
+      "k": 40.0,
+      "statistic": "share_within_20km",
+      "p_one_sided": 0.9123625458180606
+    },
+    {
+      "null": "M3",
+      "k": 80.0,
+      "statistic": "median",
+      "p_one_sided": 0.9100299900033322
+    },
+    {
+      "null": "M3",
+      "k": 80.0,
+      "statistic": "mean",
+      "p_one_sided": 0.5201599466844385
+    },
+    {
+      "null": "M3",
+      "k": 80.0,
+      "statistic": "share_within_20km",
+      "p_one_sided": 0.9290236587804065
+    }
+  ]
+}
