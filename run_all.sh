@@ -8,3 +8,5 @@ python3 crosscountry.py
 python3 global_bases.py
 python3 make_tex.py
 cd ../report && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+cd ../src && python3 make_docs.py
+cd .. && if command -v mkdocs >/dev/null; then mkdocs build --strict; fi

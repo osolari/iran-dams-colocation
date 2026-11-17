@@ -153,7 +153,7 @@ def fig_rank(t, alma, key, fname, title, xlabel):
     ax.grid(axis="y", visible=False)
     ax.legend(loc="upper right", fontsize=7.5, frameon=True, framealpha=0.95, edgecolor="none")
     ax.set_title(title)
-    fig.savefig(FIG / fname); plt.close(fig)
+    style.save(fig, fname.replace(".pdf", "")); plt.close(fig)
 
 
 def run():

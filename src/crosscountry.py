@@ -54,7 +54,7 @@ def timelines():
         ax.set_ylabel("Dams completed")
     fig.suptitle("Dam completions per five-year period (GDW v1.0)", fontsize=10)
     fig.tight_layout()
-    fig.savefig(FIG / "fig5_timelines.pdf"); plt.close(fig)
+    style.save(fig, "fig5_timelines"); plt.close(fig)
     json.dump(out, open(TAB / "dam_timelines_gdw.json", "w"), indent=1)
     return out
 
@@ -69,7 +69,7 @@ def density_fig(o):
     ax.set_xlabel("Dams per 10,000 km²")
     ax.set_xlim(0, o.dams_per_10k_km2.max() * 1.35); ax.grid(axis="y", visible=False)
     ax.set_title("Dam density from national counts")
-    fig.savefig(FIG / "fig6_density.pdf"); plt.close(fig)
+    style.save(fig, "fig6_density"); plt.close(fig)
 
 
 if __name__ == "__main__":

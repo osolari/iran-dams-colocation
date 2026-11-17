@@ -1,0 +1,35 @@
+site_name: Dams, missile bases and water
+site_description: A statistical assessment of a New York Times claim about Iranian dams
+site_author: Omid S. Solari, Ph.D.
+site_url: https://osolari.github.io/iran-dams-colocation/
+repo_url: https://github.com/osolari/iran-dams-colocation
+repo_name: osolari/iran-dams-colocation
+copyright: Omid S. Solari, Ph.D.
+
+theme:
+  name: material
+  palette:
+    primary: black
+    accent: red
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+
+nav:
+  - Overview: index.md
+  - Methods: methods.md
+  - Results: results.md
+  - The authors' record: authors.md
+  - Data sources: sources.md
+  - Reproduce: reproduce.md
+
+markdown_extensions:
+  - tables
+  - attr_list
+  - admonition
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css

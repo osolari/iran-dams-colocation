@@ -1,0 +1,30 @@
+# Dams, missile bases and water
+
+**A statistical assessment of a *New York Times* claim about Iranian dams**
+
+Omid S. Solari, Ph.D. (Ph.D. in Statistics, University of California, Berkeley)
+
+On 16 November 2026 *The New York Times* suggested that Iran's dams overlap geographically with the underground missile
+sites struck by the United States and Israel, that Iran has an unusually large number of dams, and that the dams may have
+been built to supply those sites. This site documents an open, reproducible test of each element of that argument.
+
+[Read the full report (PDF)](report.pdf){ .md-button .md-button--primary }
+[Source code on GitHub](https://github.com/osolari/iran-dams-colocation){ .md-button }
+
+![Iranian dams and launch bases](figures/fig1_map.png)
+
+## Findings
+
+| Claim | Finding |
+|---|---|
+| Dams and missile sites overlap | **Not significant against random locations in Iran (median 48.1 km, p = 0.146); after matching on terrain, towns and rivers the bases lie farther from dams than expected (p = 0.908).** The mean is shorter than random (p = 0.011) but not after matching. |
+| The overlap is distinctive to military sites | **Towns and airports show the same apparent overlap**; it reflects settlement geography. |
+| Military siting near water is anomalous | **Iran's launch bases rank 49th of 54 states for proximity to the nearest dam or coast; military sites in 91% of states lie closer to water.** Relative to each state's own geography: 29th for dams, 47th for dams or coast. |
+| Iran has unusually many dams | **Dam density of 3.3 per 10,000 km², below Spain (25.1), Turkey (11.9) and Morocco (6.7); construction peaks in 2015–2019, the same period as Turkey.** |
+| The authors are warmongers | **0 of 36 Iran-related articles reviewed advocate military action**; 10 criticise the Iranian government. |
+
+## Caveats
+
+The article's full text, Nima Shokri's map of 533 dams and the article's strike map are not public. Global Dam Watch
+(183 Iranian dams) and the Alma Research Center's list of 25 launch bases are used instead. See
+[Data sources](sources.md) and the limitations section of the report.

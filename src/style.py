@@ -1,5 +1,17 @@
 """Matplotlib style using the validated reference palette (dataviz skill, light mode)."""
+from pathlib import Path
 import matplotlib as mpl
+
+_ROOT = Path(__file__).resolve().parents[1]
+_PDF = _ROOT / "report" / "figures"
+_PNG = _ROOT / "docs" / "figures"
+
+
+def save(fig, name: str):
+    """Save a figure as PDF (report) and PNG (documentation site)."""
+    _PDF.mkdir(parents=True, exist_ok=True); _PNG.mkdir(parents=True, exist_ok=True)
+    fig.savefig(_PDF / f"{name}.pdf")
+    fig.savefig(_PNG / f"{name}.png", dpi=160)
 
 BLUE, ORANGE, AQUA, YELLOW, MAGENTA, GREEN, VIOLET, RED = (
     "#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948")

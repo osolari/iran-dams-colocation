@@ -236,7 +236,7 @@ def figures(bases, nulls, curves, res):
     ax.set_xlabel("Longitude (°E)"); ax.set_ylabel("Latitude (°N)"); ax.set_aspect(1 / np.cos(np.radians(32.5)))
     ax.legend(loc="lower left", frameon=True, framealpha=0.9, edgecolor="none", fontsize=7.5); ax.grid(False)
     ax.set_title("Iranian dams and medium-range missile launch bases")
-    fig.savefig(FIG / "fig1_map.pdf"); plt.close(fig)
+    style.save(fig, "fig1_map"); plt.close(fig)
 
     # Fig 2: null distributions of the median NN distance
     obs = np.median(bases.d_dam)
@@ -254,7 +254,7 @@ def figures(bases, nulls, curves, res):
     axes[0].text(obs - 1.5, axes[0].get_ylim()[1] * 0.95, f"observed {obs:.1f} km", color=style.CRIMSON, fontsize=8, va="top", ha="right")
     axes[-1].set_xlabel("Median distance from the 25 launch bases to their nearest dam (km)")
     fig.suptitle("Median base-to-dam distance: observed value and null distributions", fontsize=10, y=0.995)
-    fig.tight_layout(); fig.savefig(FIG / "fig2_nulls.pdf"); plt.close(fig)
+    fig.tight_layout(); style.save(fig, "fig2_nulls"); plt.close(fig)
 
     # Fig 3: ECDF with envelopes
     fig, ax = plt.subplots(figsize=(6.5, 4))
@@ -269,7 +269,7 @@ def figures(bases, nulls, curves, res):
     ax.set_xlabel("Distance to nearest dam (km)"); ax.set_ylabel("Cumulative share of bases")
     ax.set_xlim(0, max(80, x.max() + 5)); ax.legend(loc="lower right")
     ax.set_title("Distance to nearest dam: launch bases and null envelopes")
-    fig.savefig(FIG / "fig3_ecdf.pdf"); plt.close(fig)
+    style.save(fig, "fig3_ecdf"); plt.close(fig)
 
     # Fig 4: placebo
     rows = [("Missile launch bases (n = 25)", res["observed"]["median"], res["tests"]["CSR"]["null_median_of_medians"], res["tests"]["M3"]["null_median_of_medians"])]
@@ -287,7 +287,7 @@ def figures(bases, nulls, curves, res):
     ax.set_xlabel("Median distance to nearest dam (km)")
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.24), ncol=3, fontsize=7.5, handletextpad=0.4, columnspacing=1.2)
     ax.set_title("Placebo comparison: median distance to nearest dam")
-    fig.savefig(FIG / "fig4_placebo.pdf"); plt.close(fig)
+    style.save(fig, "fig4_placebo"); plt.close(fig)
 
 if __name__ == "__main__":
     run()
