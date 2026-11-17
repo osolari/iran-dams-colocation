@@ -8,7 +8,7 @@ On 16 November 2026 *The New York Times* suggested that Iran's dams overlap geog
 sites struck by the United States and Israel, that Iran has an unusually large number of dams, and that the dams may have
 been built to supply those sites. This site documents an open, reproducible test of each element of that argument.
 
-**The data do not support the claim.** Missile bases are not unusually close to dams, military bases near water are the
+**The data do not support the NYT article's claim.** Iran's missile bases are not unusually close to dams, military bases near water are the
 norm worldwide, and Iran's dam numbers are not unusual for a water-scarce country.
 
 [Read the full report (PDF)](report.pdf){ .md-button .md-button--primary }
@@ -18,7 +18,7 @@ norm worldwide, and Iran's dam numbers are not unusual for a water-scarce countr
 
 ## Findings
 
-| Claim in the article | What the data show |
+| Claim in the NYT article | What the data show |
 |---|---|
 | Dams and missile sites overlap | **Rejected. Not significant against random locations in Iran (median 48.1 km, p = 0.146); after matching on terrain, towns and rivers the bases lie farther from dams than expected (p = 0.908).** The mean is shorter than random (p = 0.011) but not after matching. |
 | The overlap is distinctive to military sites | **Rejected. Towns and airports show the same apparent overlap**; it reflects settlement geography. |
@@ -27,6 +27,6 @@ norm worldwide, and Iran's dam numbers are not unusual for a water-scarce countr
 
 ## Caveats
 
-The article's full text, Nima Shokri's map of 533 dams and the article's strike map are not public. Global Dam Watch
+The NYT article's full text, Nima Shokri's map of 533 Iranian dams and the NYT article's strike map are not public. Global Dam Watch
 (183 Iranian dams) and the Alma Research Center's list of 25 launch bases are used instead. See
 [Data sources](sources.md) and the limitations section of the report.
