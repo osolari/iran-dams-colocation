@@ -1,5 +1,4 @@
 # iran-dams-colocation
-
 Omid S. Solari, Ph.D.
 
 Statistical assessment of the claims in *The New York Times* (16 November 2026, "War May Answer Longtime Riddle of Iranian Dams Built for No Clear Reason", Mahoozi and Solomon) that Iran's dams overlap unusually with its missile sites and may have been built to supply them.
