@@ -12,7 +12,7 @@ Statistical assessment of the claims in *The New York Times* (16 November 2026, 
 | Are they closer than sites matched on terrain, towns and rivers? | No. The bases lie farther from dams than matched sites (p = 0.908). |
 | Do towns and airports show the same apparent overlap? | Yes. Under the unadjusted test towns are much closer to dams (p < 0.001); under the matched test neither is unusual. |
 | Are bases struck in June 2025 closer to dams than those not attacked? | No (48.1 against 56.9 km, p = 0.30). |
-| How do Iran's launch bases rank globally for proximity to water (dam or coast)? | 50th of 55; military sites in 91% of countries lie closer to water. Relative to each country's own geography: 28th of 55 for dams, 47th for dams or coast. |
+| How do Iran's launch bases rank globally for proximity to water (dam or coast)? | 49th of 54 states; military sites in 91% of states lie closer to water. Relative to each state's own geography: 29th of 54 for dams, 47th for dams or coast. |
 | Is Iran's dam construction unusual? | No. Its timing matches Turkey's (peak 2015 to 2019), and its density of 3.3 per 10,000 km² is below Spain (25.1), Turkey (11.9) and Morocco (6.7). |
 | Do the authors advocate military action? | None of the 36 Iran-related articles catalogued does; 10 criticise the Iranian government. The only bias allegations found against Solomon (White House, NewsBusters) accuse her of being too favourable to Iran. |
 

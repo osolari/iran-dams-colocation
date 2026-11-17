@@ -42,7 +42,7 @@ def timelines():
     for ax, c in zip(axes.ravel(), countries):
         s = g[g.COUNTRY == c].YEAR_DAM
         dec = (s // 5 * 5).value_counts().sort_index()
-        ax.bar(dec.index + 2.5, dec.values, width=4.2, color=style.ORANGE if c == "Iran" else style.BLUE)
+        ax.bar(dec.index + 2.5, dec.values, width=4.2, color=style.CRIMSON if c == "Iran" else style.STEEL)
         peak = int(dec.idxmax())
         ax.set_title(f"{c}\nn = {len(s)}, peak {peak}–{peak+4}", fontsize=8.5)
         ax.set_xlim(1900, 2026)
@@ -62,11 +62,11 @@ def timelines():
 def density_fig(o):
     fig, ax = plt.subplots(figsize=(6.5, 2.6))
     o = o.sort_values("dams_per_10k_km2")
-    cols = [style.ORANGE if c == "Iran" else style.BLUE for c in o.country]
+    cols = [style.CRIMSON if c == "Iran" else style.STEEL for c in o.country]
     ax.barh(o.country, o.dams_per_10k_km2, color=cols, height=0.6)
     for y, (v, n) in enumerate(zip(o.dams_per_10k_km2, o.dams)):
-        ax.text(v + 0.3, y, f"{v:.1f}  ({n:,} dams)", va="center", fontsize=8, color=style.INK)
-    ax.set_xlabel("Dams per 10,000 km² (national counts)")
+        ax.text(v + 0.4, y, f"{v:.1f} ({n:,} dams)", va="center", fontsize=8, color=style.INK)
+    ax.set_xlabel("Dams per 10,000 km²")
     ax.set_xlim(0, o.dams_per_10k_km2.max() * 1.35); ax.grid(axis="y", visible=False)
     ax.set_title("Dam density from national counts")
     fig.savefig(FIG / "fig6_density.pdf"); plt.close(fig)

@@ -223,17 +223,18 @@ def figures(bases, nulls, curves, res):
     fig, ax = plt.subplots(figsize=(7, 5.6))
     piv = cells.pivot_table(index="lat", columns="lon", values="elev")
     sc = ax.pcolormesh(piv.columns.values, piv.index.values, np.ma.masked_invalid(piv.values),
-                       cmap=plt.matplotlib.colors.ListedColormap(style.SEQ), shading="nearest", alpha=0.6, lw=0)
+                       cmap="Greys", vmin=-500, vmax=3500, shading="nearest", edgecolors="none",
+                       antialiased=False, rasterized=True)
     ax.plot(gx, gy, color=style.INK2, lw=0.8)
-    ax.scatter(dams.lon, dams.lat, s=14, color=style.ORANGE, edgecolor="white", lw=0.5, label=f"Dams (GDW v1.0, n={len(dams)})", zorder=3)
+    ax.scatter(dams.lon, dams.lat, s=14, color=style.STEEL, edgecolor="white", lw=0.5, label=f"Dams, GDW v1.0 (n = {len(dams)})", zorder=3)
     st = bases.struck_june2025 == 1
-    ax.scatter(bases.lon[st], bases.lat[st], s=46, marker="^", color=style.BLUE, edgecolor="white", lw=0.8,
-               label=f"Launch bases struck June 2025 (n={st.sum()})", zorder=4)
-    ax.scatter(bases.lon[~st], bases.lat[~st], s=46, marker="^", facecolor="white", edgecolor=style.BLUE, lw=1.2,
-               label=f"Launch bases not struck (n={(~st).sum()})", zorder=4)
-    cb = fig.colorbar(sc, ax=ax, shrink=0.6, pad=0.01); cb.set_label("Elevation (m), ETOPO1 10′")
+    ax.scatter(bases.lon[st], bases.lat[st], s=50, marker="^", color=style.CRIMSON, edgecolor="white", lw=0.8,
+               label=f"Launch bases struck in June 2025 (n = {st.sum()})", zorder=4)
+    ax.scatter(bases.lon[~st], bases.lat[~st], s=50, marker="^", facecolor="white", edgecolor=style.CRIMSON, lw=1.4,
+               label=f"Launch bases not struck (n = {(~st).sum()})", zorder=4)
+    cb = fig.colorbar(sc, ax=ax, shrink=0.6, pad=0.02); cb.set_label("Elevation (m), ETOPO1 at 10 arc-min")
     ax.set_xlabel("Longitude (°E)"); ax.set_ylabel("Latitude (°N)"); ax.set_aspect(1 / np.cos(np.radians(32.5)))
-    ax.legend(loc="lower left"); ax.grid(False)
+    ax.legend(loc="lower left", frameon=True, framealpha=0.9, edgecolor="none", fontsize=7.5); ax.grid(False)
     ax.set_title("Iranian dams and medium-range missile launch bases")
     fig.savefig(FIG / "fig1_map.pdf"); plt.close(fig)
 
@@ -244,13 +245,14 @@ def figures(bases, nulls, curves, res):
     fig, axes = plt.subplots(len(labels), 1, figsize=(6.5, 6.8), sharex=True)
     for ax, (m, lab) in zip(axes, labels.items()):
         v = nulls[m]
-        ax.hist(v, bins=60, color=style.MUTED, alpha=0.55, edgecolor="white", linewidth=0.3)
-        ax.axvline(obs, color=style.BLUE, lw=2)
+        ax.hist(v, bins=60, color=style.STEEL, alpha=0.55, edgecolor="white", linewidth=0.3)
+        ax.axvline(obs, color=style.CRIMSON, lw=2)
         ax.text(0.99, 0.82, f"{lab}\nnull median {np.median(v):.1f} km, p = {res['tests'][m]['p_one_sided']:.3f}",
-                transform=ax.transAxes, ha="right", va="top", fontsize=8, color=style.INK)
+                transform=ax.transAxes, ha="right", va="top", fontsize=8, color=style.INK,
+                bbox=dict(facecolor="white", edgecolor="none", alpha=0.85, pad=1.5))
         ax.set_yticks([]); ax.grid(axis="y", visible=False)
-    axes[0].text(obs - 1.5, axes[0].get_ylim()[1] * 0.95, f"observed {obs:.1f} km", color=style.BLUE, fontsize=8, va="top", ha="right")
-    axes[-1].set_xlabel("Median distance from a launch base to its nearest dam (km), 25 bases")
+    axes[0].text(obs - 1.5, axes[0].get_ylim()[1] * 0.95, f"observed {obs:.1f} km", color=style.CRIMSON, fontsize=8, va="top", ha="right")
+    axes[-1].set_xlabel("Median distance from the 25 launch bases to their nearest dam (km)")
     fig.suptitle("Median base-to-dam distance: observed value and null distributions", fontsize=10, y=0.995)
     fig.tight_layout(); fig.savefig(FIG / "fig2_nulls.pdf"); plt.close(fig)
 
@@ -258,32 +260,33 @@ def figures(bases, nulls, curves, res):
     fig, ax = plt.subplots(figsize=(6.5, 4))
     x = np.sort(bases.d_dam.values); y = np.arange(1, len(x) + 1) / len(x)
     q = np.linspace(0, 1, len(x) + 1)[1:]
-    for m, col, lab in (("CSR", style.MUTED, "CSR 95% envelope"), ("M3", style.AQUA, "Matched (M3) 95% envelope")):
+    for m, col, lab in (("CSR", style.BLACK, "CSR 95% envelope"), ("M3", style.STEEL, "Matched (M3) 95% envelope")):
         c = curves[m]
         lo, hi, md = np.quantile(c, 0.025, axis=0), np.quantile(c, 0.975, axis=0), np.median(c, axis=0)
-        ax.fill_betweenx(q, lo, hi, step="post", color=col, alpha=0.25, lw=0, label=lab)
+        ax.fill_betweenx(q, lo, hi, step="post", color=col, alpha=0.15 if m == "CSR" else 0.25, lw=0, label=lab)
         ax.step(md, q, where="post", color=col, lw=1.2, ls="--")
-    ax.step(x, y, where="post", color=style.BLUE, lw=2, label="Observed launch bases")
-    ax.set_xlabel("Distance to nearest dam (km)"); ax.set_ylabel("Share of bases within distance")
+    ax.step(x, y, where="post", color=style.CRIMSON, lw=2, label="Observed launch bases")
+    ax.set_xlabel("Distance to nearest dam (km)"); ax.set_ylabel("Cumulative share of bases")
     ax.set_xlim(0, max(80, x.max() + 5)); ax.legend(loc="lower right")
     ax.set_title("Distance to nearest dam: launch bases and null envelopes")
     fig.savefig(FIG / "fig3_ecdf.pdf"); plt.close(fig)
 
     # Fig 4: placebo
-    rows = [("Missile launch bases (n=25)", res["observed"]["median"], res["tests"]["CSR"]["null_median_of_medians"], res["tests"]["M3"]["null_median_of_medians"])]
+    rows = [("Missile launch bases (n = 25)", res["observed"]["median"], res["tests"]["CSR"]["null_median_of_medians"], res["tests"]["M3"]["null_median_of_medians"])]
+    short = {"Cities >= 50k (Natural Earth)": "Towns of 50,000+", "Airports (Global Map Iran)": "Airports"}
     for k, v in res["placebo"].items():
-        rows.append((f"{k} (n={v['n']})", v["observed_median"], v["csr_null_median"], v["m3_null_median"]))
-    fig, ax = plt.subplots(figsize=(6.5, 2.6))
+        rows.append((f"{short.get(k, k)} (n = {v['n']})", v["observed_median"], v["csr_null_median"], v["m3_null_median"]))
+    fig, ax = plt.subplots(figsize=(6.5, 3.1))
     for i, (lab, o, c, m3) in enumerate(rows):
-        ax.hlines(i, 30, 66, color=style.GRID, lw=1)
-        ax.scatter(c, i, s=70, marker="s", color=style.MUTED, zorder=2, label="Expected if sites were random in Iran (CSR)" if i == 0 else None)
-        ax.scatter(m3, i, s=70, marker="D", color=style.AQUA, zorder=3, label="Expected for matched sites (M3)" if i == 0 else None)
-        ax.scatter(o, i, s=80, color=style.BLUE, zorder=4, edgecolor="white", lw=1, label="Observed" if i == 0 else None)
-    ax.set_yticks(range(len(rows)), [r[0] for r in rows]); ax.invert_yaxis(); ax.set_ylim(len(rows) - 0.5, -1.3)
+        ax.hlines(i, 30, 66, color=style.GRID, lw=1, zorder=0)
+        ax.scatter(c, i, s=55, marker="s", color=style.BLACK, zorder=2, label="Expected: random sites in Iran (CSR)" if i == 0 else None)
+        ax.scatter(m3, i, s=70, marker="D", facecolor="none", edgecolor=style.STEEL, lw=1.8, zorder=3, label="Expected: matched sites (M3)" if i == 0 else None)
+        ax.scatter(o, i, s=55, color=style.CRIMSON, zorder=4, label="Observed" if i == 0 else None)
+    ax.set_yticks(range(len(rows)), [r[0] for r in rows]); ax.set_ylim(len(rows) - 0.5, -0.5)
     ax.set_xlim(30, 66); ax.grid(axis="y", visible=False)
     ax.set_xlabel("Median distance to nearest dam (km)")
-    ax.legend(loc="upper center", ncol=3, fontsize=7, bbox_to_anchor=(0.45, 1.02), handletextpad=0.3, columnspacing=1)
-    ax.set_title("Placebo comparison: median distance to nearest dam", pad=14)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.24), ncol=3, fontsize=7.5, handletextpad=0.4, columnspacing=1.2)
+    ax.set_title("Placebo comparison: median distance to nearest dam")
     fig.savefig(FIG / "fig4_placebo.pdf"); plt.close(fig)
 
 if __name__ == "__main__":

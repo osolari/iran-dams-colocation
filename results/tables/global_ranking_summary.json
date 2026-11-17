@@ -1,7 +1,7 @@
 {
  "current": {
   "n_bases": 5806,
-  "n_countries_ranked": 54,
+  "n_countries_ranked": 53,
   "iran_wikidata_n": 22
  },
  "iran_alma": {
@@ -11,42 +11,42 @@
   "d_water_median": 44.53505640731625,
   "d_water_median_lo": 27.445142884757846,
   "d_water_median_hi": 56.75517528098873,
-  "d_water_rand_median": 58.10080470779797,
-  "d_water_ratio": 0.7665135901523753,
+  "d_water_rand_median": 54.89152672535131,
+  "d_water_ratio": 0.8113284338063056,
   "d_dam_mean": 57.492654318165386,
   "d_dam_median": 48.13503719166383,
   "d_dam_median_lo": 32.613582545861874,
   "d_dam_median_hi": 58.64196814122457,
-  "d_dam_rand_median": 65.66501009121815,
-  "d_dam_ratio": 0.7330393633503952,
+  "d_dam_rand_median": 59.64728597494285,
+  "d_dam_ratio": 0.8069945917050578,
   "d_coast_mean": 232.8935782850318,
   "d_coast_median": 239.8498306220626,
-  "d_coast_median_lo": 158.66241573630458,
+  "d_coast_median_lo": 153.50047180790804,
   "d_coast_median_hi": 328.59579122879904,
-  "d_coast_rand_median": 280.2698084910634,
-  "d_coast_ratio": 0.8557819049914197
+  "d_coast_rand_median": 266.2683497988497,
+  "d_coast_ratio": 0.900782352852884
  },
  "iran_alma_d_water_rank_among": {
-  "rank": 50,
-  "of": 55,
-  "share_of_countries_closer": 0.9074074074074074
+  "rank": 49,
+  "of": 54,
+  "share_of_countries_closer": 0.9056603773584906
  },
  "iran_alma_d_water_ratio_rank": {
   "rank": 47,
-  "of": 55
+  "of": 54
  },
  "iran_alma_d_dam_rank_among": {
   "rank": 45,
-  "of": 55,
-  "share_of_countries_closer": 0.8148148148148148
+  "of": 54,
+  "share_of_countries_closer": 0.8301886792452831
  },
  "iran_alma_d_dam_ratio_rank": {
-  "rank": 28,
-  "of": 55
+  "rank": 29,
+  "of": 54
  },
  "incl_dissolved": {
   "n_bases": 6972,
-  "n_countries_ranked": 59,
+  "n_countries_ranked": 58,
   "iran_wikidata_n": 23
  }
 }

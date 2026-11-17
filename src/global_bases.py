@@ -85,8 +85,9 @@ def boot_ci(x, f=np.median):
 
 def summarise(d, countries, dam_t, coast_t, label):
     rows = []
+    dep = set(countries.loc[countries.TYPE == "Dependency", "ADM0_A3"])
     for a3, g in d.groupby("ADM0_A3"):
-        if len(g) < MIN_N:
+        if len(g) < MIN_N or a3 in dep:  # dependencies (e.g. Guam) excluded: not states
             continue
         poly = countries.loc[countries.ADM0_A3 == a3].geometry.union_all()
         rnd = distances(random_points(poly, N_RAND), dam_t, coast_t)
@@ -133,12 +134,24 @@ def fig_rank(t, alma, key, fname, title, xlabel):
     is_ir = t.country.str.startswith("Iran")
     lo, hi, md, mn = t[f"{key}_median_lo"], t[f"{key}_median_hi"], t[f"{key}_median"], t[f"{key}_mean"]
     ax.hlines(y, lo, hi, color=style.GRID, lw=3)
-    ax.scatter(mn, y, s=14, marker="|", color=style.INK2, label="Mean", zorder=3)
-    ax.scatter(md[~is_ir], y[~is_ir], s=16, color=style.BLUE, label="Median (95% bootstrap CI)", zorder=4)
-    ax.scatter(md[is_ir], y[is_ir], s=30, color=style.ORANGE, zorder=5, label="Iran")
-    ax.set_yticks(y, [f"{c}  (n={n})" for c, n in zip(t.country, t.n_bases)], fontsize=6.5)
-    ax.invert_yaxis(); ax.set_xscale("log"); ax.set_xlim(1, 600); ax.set_xlabel(xlabel)
-    ax.grid(axis="y", visible=False); ax.legend(loc="upper right", fontsize=7)
+    ax.scatter(mn, y, s=30, marker="|", color=style.BLACK, label="Mean", zorder=3)
+    ax.scatter(md[~is_ir], y[~is_ir], s=16, color=style.STEEL, label="Median, 95% bootstrap CI", zorder=4)
+    ax.scatter(md[is_ir], y[is_ir], s=30, color=style.CRIMSON, zorder=5, label="Median, Iran")
+    names = [c.replace("United States of America", "United States").replace(" (25 launch bases, Alma 2026)", ": launch bases (Alma)")
+             for c in t.country]
+    names = [("Iran: Wikidata sites" if nm == "Iran" else nm) for nm in names]
+    ax.set_yticks(y, [f"{c} (n = {n})" for c, n in zip(names, t.n_bases)], fontsize=7)
+    for lbl, ir in zip(ax.get_yticklabels(), is_ir):
+        if ir:
+            lbl.set_color(style.CRIMSON); lbl.set_fontweight("bold")
+    lo_x = max(0.5, 0.7 * min(lo.min(), mn.min()))
+    hi_x = 1.4 * max(hi.max(), mn.max())
+    ax.set_ylim(len(t) - 0.4, -0.6)
+    ax.set_xscale("log"); ax.set_xlim(lo_x, hi_x); ax.set_xlabel(xlabel)
+    ticks = [t_ for t_ in (1, 2, 5, 10, 20, 50, 100, 200, 500, 1000) if lo_x <= t_ <= hi_x]
+    ax.set_xticks(ticks, [str(t_) for t_ in ticks]); ax.xaxis.set_minor_formatter(plt.NullFormatter())
+    ax.grid(axis="y", visible=False)
+    ax.legend(loc="upper right", fontsize=7.5, frameon=True, framealpha=0.95, edgecolor="none")
     ax.set_title(title)
     fig.savefig(FIG / fname); plt.close(fig)
 
